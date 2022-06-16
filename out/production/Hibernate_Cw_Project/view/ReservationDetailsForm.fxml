@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="756.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReservationDetailsFormController">
+   <children>
+      <Pane layoutX="64.0" layoutY="34.0" prefHeight="51.0" prefWidth="1063.0" style="-fx-background-color: #f7b731;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="329.0" layoutY="8.0" text="R E S E R V A T I O N    D E T A I L S" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TableView fx:id="tblRoomReservation" layoutX="55.0" layoutY="332.0" prefHeight="363.0" prefWidth="955.0" stylesheets="@css/color.css">
+         <columns>
+            <TableColumn fx:id="colStudentID" prefWidth="209.0" text="STUDENT ID" />
+            <TableColumn fx:id="colStudentName" prefWidth="278.0" text="STUDENT NAME" />
+            <TableColumn fx:id="colRejisterDate" prefWidth="212.0" text="REGISTER DATE" />
+            <TableColumn fx:id="colKeyMoney" prefWidth="255.0" text="KEY MONEY" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txtRoomType" labelFloat="true" layoutX="135.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="420.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="MONTHLY RENT">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="706.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="QTY">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cmbRoomId" layoutX="284.0" layoutY="117.0" prefHeight="44.0" prefWidth="502.0" promptText="P L E A S E    S E L E C T    R O O M   I D" />
+   </children>
+</AnchorPane>
