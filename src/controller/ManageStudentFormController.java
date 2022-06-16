@@ -8,11 +8,15 @@
 
 package controller;
 
+import bo.ManageStudentBOImpl;
+import bo.ManageStudentBo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import dto.StudentDTO;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -43,8 +47,33 @@ public class ManageStudentFormController {
     public JFXTextField txtSearchRegisterId;
 
 
+    public void initialize(){
+        comboLoad();
+    }
 
-    public void AddStudentOnAction(ActionEvent actionEvent) {
+    private void comboLoad() {
+        cmbGender.getItems().add("MALE");
+        cmbGender.getItems().add("FEMALE");
+    }
+
+
+    public void AddStudentOnAction(ActionEvent actionEvent) throws Exception {
+        try {
+            ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+
+            if (manageStudentBO.add(new StudentDTO(txtSRejNumber.getText(),
+                    txtStudentName.getText(),
+                    txtSAddress.getText(),
+                    txtContact.getText(),
+                    txtDateOfBirth.getValue().toString(),
+                    cmbGender.getValue().toString()))) {
+                new Alert(Alert.AlertType.CONFIRMATION, " Student Saved... Successfully").showAndWait();
+            }
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. try again carefully!").showAndWait();
+        }
+
+
     }
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {

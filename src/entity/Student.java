@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Data
 @Entity
-public class Student {
+public class Student  {
     @Id
     private String student_id;
     private String name;
