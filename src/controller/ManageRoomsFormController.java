@@ -166,7 +166,16 @@ public class ManageRoomsFormController {
 
 
     public void DeleteRoomOnAction(ActionEvent actionEvent) throws Exception {
-
+        ManageRoomBOImpl manageRoomBO = new ManageRoomBOImpl();
+        try {
+            if (manageRoomBO.deleteRoom(txtRoomId.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Delete this record?").showAndWait();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Please Try again!").showAndWait();
+        }
+        clear();
+        setRoomDataLoad();
     }
 
     public void UpdateRoomOnAction(ActionEvent actionEvent) throws Exception {
