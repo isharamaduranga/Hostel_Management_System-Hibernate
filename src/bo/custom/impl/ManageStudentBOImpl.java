@@ -6,8 +6,9 @@
  * Year        : 2022
  */
 
-package bo;
+package bo.custom.impl;
 
+import bo.custom.ManageStudentBo;
 import dao.custom.StudentDAO;
 import dao.custom.impl.StudentDAOImpl;
 import dto.StudentDTO;

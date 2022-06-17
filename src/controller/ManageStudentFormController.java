@@ -8,17 +8,15 @@
 
 package controller;
 
-import animatefx.animation.Bounce;
 import animatefx.animation.Pulse;
 import animatefx.animation.ZoomIn;
-import bo.ManageStudentBOImpl;
-import bo.ManageStudentBo;
+import bo.custom.impl.ManageStudentBOImpl;
+import bo.custom.ManageStudentBo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import dto.StudentDTO;
-import entity.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
