@@ -8,6 +8,22 @@
 
 package bo.custom.impl;
 
-public class ManageRoomBOImpl {
+import bo.custom.ManageRoomBO;
+import dao.custom.RoomDAO;
+import dao.custom.impl.RoomDAOImpl;
+import dto.RoomDTO;
+import entity.Room;
 
+public class ManageRoomBOImpl implements ManageRoomBO {
+
+    @Override
+    public boolean add(RoomDTO roomDTO) throws Exception {
+        RoomDAO roomDAO = new RoomDAOImpl();
+       return roomDAO.add(new Room(
+               roomDTO.getRoom_id(),
+               roomDTO.getType(),
+               roomDTO.getMonthly_rent(),
+               roomDTO.getQty()
+        ));
+    }
 }
