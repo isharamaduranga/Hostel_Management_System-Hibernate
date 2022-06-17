@@ -32,6 +32,10 @@ public class ManageRoomsFormController {
     public JFXTextField txtSearchRoomId;
     public JFXComboBox cmbRoomType;
 
+    public void initialize(){
+
+    }
+
 
     public void AddStudentOnAction(ActionEvent actionEvent) {
     }
