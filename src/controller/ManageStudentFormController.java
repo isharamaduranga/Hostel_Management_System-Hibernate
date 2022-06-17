@@ -185,7 +185,17 @@ public class ManageStudentFormController {
     }
 
     public void DeleteStudentOnAction(ActionEvent actionEvent) throws Exception {
+        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        try {
+            if (manageStudentBO.deleteStudent(txtSRejNumber.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Delete this record?").showAndWait();
+            }
 
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Please Try again!").showAndWait();
+        }
+        clear();
+        setStudentData();
 
     }
 
