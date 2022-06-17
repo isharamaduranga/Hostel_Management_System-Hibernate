@@ -8,6 +8,8 @@
 
 package controller;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.Pulse;
 import animatefx.animation.ZoomIn;
 import bo.ManageStudentBOImpl;
 import bo.ManageStudentBo;
@@ -26,12 +28,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import util.ValidationUtil;
 import view.tm.StudentTM;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ManageStudentFormController {
     public AnchorPane studentManageContext;
@@ -57,6 +64,8 @@ public class ManageStudentFormController {
     public JFXComboBox cmbGender;
     public JFXTextField txtSearchRegisterId;
 
+    /** Define Linked-HashMap for the validation  */
+    LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
     public void initialize() {
 
@@ -69,11 +78,13 @@ public class ManageStudentFormController {
 
         /** tabel zoom in feature */
         new ZoomIn(tblStudent).play();
-
+        btnAdd.setDisable(true);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
 
         try {
             setStudentData();
-
+            comboLoad();
             tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue!=null){
                     setDataFields(newValue);
@@ -82,8 +93,20 @@ public class ManageStudentFormController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        /** create validation pattern*/
+        //Create a pattern and compile it to use
+        Pattern idPattern = Pattern.compile("^(SI)[0-9]{3,5}$");
+        Pattern namePattern = Pattern.compile("^[A-z]{3,20}$");
+        Pattern AddressPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+        Pattern TPNumberPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9}$");
 
-        comboLoad();
+        //add pattern and text to the map
+        map.put(txtSRejNumber,idPattern);
+        map.put(txtStudentName,namePattern);
+        map.put(txtSAddress,AddressPattern);
+        map.put(txtContact,TPNumberPattern);
+
+
     }
 
     private void setDataFields(StudentDTO s) {
@@ -93,7 +116,9 @@ public class ManageStudentFormController {
         txtContact.setText(s.getContact_no());
         txtDateOfBirth.setValue(LocalDate.parse(s.getDate()));
         cmbGender.setValue(s.getGender());
-
+        btnUpdate.setDisable(false);
+        btnDelete.setDisable(false);
+        btnAdd.setDisable(true);
     }
 
     private void setStudentData() throws Exception {
@@ -104,7 +129,8 @@ public class ManageStudentFormController {
         for (StudentDTO dto : studentDTOS) {
 
 
-            tmList.add(new StudentTM(dto.getStudent_id(),
+            tmList.add(new StudentTM(
+                    dto.getStudent_id(),
                     dto.getName(),
                     dto.getAddress(),
                     dto.getContact_no(),
@@ -112,7 +138,7 @@ public class ManageStudentFormController {
                     dto.getGender()));
         }
         tblStudent.setItems(tmList);
-        FilteredList<StudentDTO> filterData = new FilteredList<StudentDTO>(tmList, b -> true);
+        FilteredList<StudentDTO> filterData = new FilteredList(tmList, b -> true);
 
         txtSearchRegisterId.textProperty().addListener((observable, oldValue, newValue) -> {
             filterData.setPredicate(StudentDTO -> {
@@ -178,12 +204,41 @@ public class ManageStudentFormController {
         txtStudentName.clear();
         txtSAddress.clear();
         txtContact.clear();
-        txtDateOfBirth.getEditor().clear();
+        txtDateOfBirth.setValue(null);
         cmbGender.getSelectionModel().clearSelection();
         txtSearchRegisterId.clear();
+        ValidationUtil.validate(map,btnAdd);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+        tblStudent.refresh();
     }
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+        if(((JFXButton) mouseEvent.getSource()).getText().equals("ADD")){
+            new Pulse(btnAdd).play();
 
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("UPDATE")){
+            new Pulse(btnUpdate).play();
+
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("DELETE")){
+            new Bounce(btnDelete).play();
+
+        }else{
+            new Pulse(btnClear).play();
+        }
+    }
+
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map,btnAdd);
+
+        if (keyEvent.getCode()== KeyCode.ENTER){
+            Object response = ValidationUtil.validate(map,btnAdd);
+            if (response instanceof JFXTextField){
+                JFXTextField textField = (JFXTextField) response;
+                textField.requestFocus();
+            }else if (response instanceof Boolean){
+
+            }
+        }
     }
 }

@@ -87,22 +87,22 @@
             <TableColumn fx:id="colGender" maxWidth="500.0" prefWidth="145.0" text="Gender" />
          </columns>
       </TableView>
-      <JFXTextField fx:id="txtSRejNumber" labelFloat="true" layoutX="19.0" layoutY="97.0" prefHeight="39.0" prefWidth="230.0" promptText="STUDENT REGISTER NUMBER">
+      <JFXTextField fx:id="txtSRejNumber" labelFloat="true" layoutX="19.0" layoutY="97.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="STUDENT REGISTER NUMBER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtStudentName" labelFloat="true" layoutX="289.0" layoutY="97.0" prefHeight="39.0" prefWidth="230.0" promptText="STUDENT NAME">
+      <JFXTextField fx:id="txtStudentName" labelFloat="true" layoutX="289.0" layoutY="97.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="STUDENT NAME">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtSAddress" labelFloat="true" layoutX="552.0" layoutY="97.0" prefHeight="39.0" prefWidth="230.0" promptText="ADDRESS">
+      <JFXTextField fx:id="txtSAddress" labelFloat="true" layoutX="552.0" layoutY="97.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ADDRESS">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="810.0" layoutY="97.0" prefHeight="39.0" prefWidth="230.0" promptText="CONTACT">
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="810.0" layoutY="97.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="CONTACT">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
