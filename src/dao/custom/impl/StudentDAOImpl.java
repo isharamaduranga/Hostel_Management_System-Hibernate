@@ -12,6 +12,7 @@ import dao.custom.StudentDAO;
 import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import util.FactoryConfiguration;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public List<Student> findAll() throws Exception {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Student> studentList = null;
+        Query sessionQuery = session.createQuery("from Student");
+        studentList = sessionQuery.list();
+        transaction.commit();
+        session.close();
+        return studentList;
     }
 }

@@ -15,12 +15,18 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import dto.StudentDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import view.tm.StudentTM;
+
+import java.util.List;
 
 public class ManageStudentFormController {
     public AnchorPane studentManageContext;
@@ -28,7 +34,7 @@ public class ManageStudentFormController {
     public JFXButton btnDelete;
     public JFXButton btnUpdate;
     public JFXButton btnClear;
-    
+
     public TableView tblStudent;
     public TableColumn colSRegID;
     public TableColumn colStudentName;
@@ -37,7 +43,7 @@ public class ManageStudentFormController {
     public TableColumn colDOB;
     public TableColumn colGender;
 
-    
+
     public JFXTextField txtSRejNumber;
     public JFXTextField txtStudentName;
     public JFXTextField txtSAddress;
@@ -47,8 +53,43 @@ public class ManageStudentFormController {
     public JFXTextField txtSearchRegisterId;
 
 
-    public void initialize(){
+    public void initialize() {
+
+        colSRegID.setCellValueFactory(new PropertyValueFactory<>("student_id"));
+        colStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact_no"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+
+
+
+        try {
+            setStudentData();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         comboLoad();
+    }
+
+    private void setStudentData() throws Exception {
+        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        ObservableList<StudentDTO>tmList= FXCollections.observableArrayList();
+        List<StudentDTO> studentDTOS = manageStudentBO.loadAllStudent();
+
+        for (StudentDTO dto : studentDTOS) {
+
+
+            tmList.add(new StudentTM(dto.getStudent_id(),
+                    dto.getName(),
+                    dto.getAddress(),
+                    dto.getContact_no(),
+                    dto.getDate(),
+                    dto.getGender()));
+        }
+        tblStudent.setItems(tmList);
     }
 
     private void comboLoad() {
@@ -69,22 +110,38 @@ public class ManageStudentFormController {
                     cmbGender.getValue().toString()))) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Student Saved... Successfully").showAndWait();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Something Went Wrong. try again carefully!").showAndWait();
         }
-
-
-    }
-
-    public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+            clear();
+        setStudentData();
     }
 
     public void DeleteStudentOnAction(ActionEvent actionEvent) {
+
+
+
     }
 
     public void UpdateStudentOnAction(ActionEvent actionEvent) {
+
+
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
+        clear();
+    }
+
+    public void clear() {
+        txtSRejNumber.clear();
+        txtStudentName.clear();
+        txtSAddress.clear();
+        txtContact.clear();
+        txtDateOfBirth.getEditor().clear();
+        cmbGender.getSelectionModel().clearSelection();
+    }
+
+    public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+
     }
 }
