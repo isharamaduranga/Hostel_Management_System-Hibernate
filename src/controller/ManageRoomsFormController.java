@@ -16,16 +16,21 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dto.RoomDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import util.ValidationUtil;
+import view.tm.RoomTM;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class ManageRoomsFormController {
@@ -54,8 +59,12 @@ public class ManageRoomsFormController {
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
-
-        comboLoad();
+        try {
+            comboLoad();
+            setRoomDataLoad();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         /** create validation pattern*/
         //Create a pattern and compile it to use
@@ -63,13 +72,32 @@ public class ManageRoomsFormController {
         Pattern rentPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{2})?$");
         Pattern qtyPattern = Pattern.compile("^[0-9]{1,}$");
 
-
         //add pattern and text to the map
         map.put(txtRoomId,idPattern);
         map.put(txtMonthlyRental,rentPattern);
         map.put(txtRoomQty,qtyPattern);
 
+        colRoomId.setCellValueFactory(new PropertyValueFactory<>("room_id"));
+        colRoomType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colMonthRent.setCellValueFactory(new PropertyValueFactory<>("monthly_rent"));
+        colRoomQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
 
+
+    }
+
+    private void setRoomDataLoad() throws Exception {
+        ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
+        List<RoomDTO> roomDTOS = manageRoomBO.loadAllStudent();
+        ObservableList<RoomTM>observableList = FXCollections.observableArrayList();
+        for (RoomDTO roomDTO : roomDTOS) {
+            observableList.add(new RoomTM(
+                    roomDTO.getRoom_id(),
+                    roomDTO.getType(),
+                    roomDTO.getMonthly_rent(),
+                    roomDTO.getQty()
+                    ));
+        }
+        tblRooms.setItems(observableList);
     }
 
     private void comboLoad() {
@@ -80,7 +108,7 @@ public class ManageRoomsFormController {
     }
 
 
-    public void AddRoomOnAction(ActionEvent actionEvent) {
+    public void AddRoomOnAction(ActionEvent actionEvent) throws Exception {
         ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
         try {
             if (manageRoomBO.add(new RoomDTO(txtRoomId.getText(),
@@ -94,6 +122,7 @@ public class ManageRoomsFormController {
             new Alert(Alert.AlertType.ERROR, "Something Went Wrong. try again carefully!").showAndWait();
         }
         clear();
+        setRoomDataLoad();
     }
 
 

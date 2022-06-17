@@ -14,6 +14,9 @@ import dao.custom.impl.RoomDAOImpl;
 import dto.RoomDTO;
 import entity.Room;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManageRoomBOImpl implements ManageRoomBO {
 
     @Override
@@ -26,4 +29,21 @@ public class ManageRoomBOImpl implements ManageRoomBO {
                roomDTO.getQty()
         ));
     }
+
+    @Override
+    public List<RoomDTO> loadAllStudent() throws Exception {
+        RoomDAO roomDAO = new RoomDAOImpl();
+        List<Room> all = roomDAO.findAll();
+        ArrayList<RoomDTO>roomsDto= new ArrayList<>();
+
+        for (Room room : all) {
+            roomsDto.add(new RoomDTO(room.getRoom_id(),
+                    room.getType(),
+                    room.getMonthly_rent(),
+                    room.getQty()
+                    ));
+        }
+        return roomsDto;
+    }
+
 }
