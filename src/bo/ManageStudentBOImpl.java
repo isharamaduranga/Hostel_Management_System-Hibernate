@@ -41,4 +41,23 @@ public class ManageStudentBOImpl implements ManageStudentBo {
         }
         return dtoArrayList;
     }
+
+    @Override
+    public boolean updateStudent(StudentDTO studentDto) throws Exception {
+        StudentDAO studentDAO = new StudentDAOImpl();
+      return  studentDAO.update(new Student(
+                studentDto.getStudent_id(),
+                studentDto.getName(),
+                studentDto.getAddress(),
+                studentDto.getContact_no(),
+                studentDto.getDate(),
+                studentDto.getGender()
+                ));
+    }
+
+    @Override
+    public boolean deleteStudent(String id) throws Exception {
+        StudentDAO studentDAO = new StudentDAOImpl();
+        return studentDAO.delete(id);
+    }
 }

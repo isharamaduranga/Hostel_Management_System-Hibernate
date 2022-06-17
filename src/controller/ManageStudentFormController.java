@@ -184,15 +184,30 @@ public class ManageStudentFormController {
         setStudentData();
     }
 
-    public void DeleteStudentOnAction(ActionEvent actionEvent) {
-
+    public void DeleteStudentOnAction(ActionEvent actionEvent) throws Exception {
 
 
     }
 
-    public void UpdateStudentOnAction(ActionEvent actionEvent) {
+    public void UpdateStudentOnAction(ActionEvent actionEvent) throws Exception {
+        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        try {
+            if (manageStudentBO.updateStudent(new StudentDTO(
+                    txtSRejNumber.getText(),
+                    txtStudentName.getText(),
+                    txtSAddress.getText(),
+                    txtContact.getText(),
+                    txtDateOfBirth.getValue().toString(),
+                    cmbGender.getValue().toString()
+                    ))) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Update it?").showAndWait();
+            }
 
-
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. try again carefully!").showAndWait();
+        }
+        clear();
+        setStudentData();
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -221,7 +236,7 @@ public class ManageStudentFormController {
             new Pulse(btnUpdate).play();
 
         }else if(((JFXButton) mouseEvent.getSource()).getText().equals("DELETE")){
-            new Bounce(btnDelete).play();
+            new Pulse(btnDelete).play();
 
         }else{
             new Pulse(btnClear).play();
