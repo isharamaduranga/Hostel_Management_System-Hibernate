@@ -84,17 +84,17 @@
             <TableColumn fx:id="colRoomQty" prefWidth="267.0" text="ROOMS COUNT" />
          </columns>
       </TableView>
-      <JFXTextField fx:id="txtRoomId" labelFloat="true" layoutX="23.0" layoutY="113.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOM ID">
+      <JFXTextField fx:id="txtRoomId" labelFloat="true" layoutX="23.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ROOM ID">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtMonthlyRental" labelFloat="true" layoutX="553.0" layoutY="113.0" prefHeight="39.0" prefWidth="230.0" promptText="MONTHLEY RENTAL(LKR)">
+      <JFXTextField fx:id="txtMonthlyRental" labelFloat="true" layoutX="553.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="MONTHLEY RENTAL(LKR)">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtRoomQty" labelFloat="true" layoutX="814.0" layoutY="113.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOMS (QTY)">
+      <JFXTextField fx:id="txtRoomQty" labelFloat="true" layoutX="814.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ROOMS (QTY)">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -110,6 +110,6 @@
          </font>
       </JFXTextField>
       <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="251.0" layoutY="228.0" size="1.3EM" />
-      <JFXComboBox fx:id="cmbRoomType" layoutX="287.0" layoutY="113.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE" />
+      <JFXComboBox fx:id="cmbRoomType" layoutX="287.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE" />
    </children>
 </AnchorPane>

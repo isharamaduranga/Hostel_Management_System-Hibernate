@@ -93,7 +93,7 @@ public class ManageStudentFormController {
         }
         /** create validation pattern*/
         //Create a pattern and compile it to use
-        Pattern idPattern = Pattern.compile("^(SI)[0-9]{3,5}$");
+        Pattern idPattern = Pattern.compile("^(SI-)[0-9]{3,5}$");
         Pattern namePattern = Pattern.compile("^[A-z]{3,20}$");
         Pattern AddressPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
         Pattern TPNumberPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9}$");

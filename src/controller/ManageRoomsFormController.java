@@ -20,7 +20,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import util.ValidationUtil;
+
+import java.util.LinkedHashMap;
+import java.util.regex.Pattern;
 
 public class ManageRoomsFormController {
     public JFXButton btnAdd;
@@ -38,12 +44,31 @@ public class ManageRoomsFormController {
     public JFXTextField txtSearchRoomId;
     public JFXComboBox cmbRoomType;
 
+    /** Define Linked-HashMap for the validation  */
+    LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
     public void initialize(){
 
         /** tabel zoom in feature */
         new ZoomIn(tblRooms).play();
+        btnAdd.setDisable(true);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+
 
         comboLoad();
+
+        /** create validation pattern*/
+        //Create a pattern and compile it to use
+        Pattern idPattern = Pattern.compile("^(RM-)[0-9]{3,5}$");
+        Pattern rentPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{2})?$");
+        Pattern qtyPattern = Pattern.compile("^[0-9]{1,}$");
+
+
+        //add pattern and text to the map
+        map.put(txtRoomId,idPattern);
+        map.put(txtMonthlyRental,rentPattern);
+        map.put(txtRoomQty,qtyPattern);
+
 
     }
 
@@ -71,6 +96,19 @@ public class ManageRoomsFormController {
         clear();
     }
 
+
+
+
+
+    public void DeleteRoomOnAction(ActionEvent actionEvent) {
+    }
+
+    public void UpdateRoomOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnClearFieldsOnAction(ActionEvent actionEvent) {
+        clear();
+    }
     public void clear(){
         txtRoomId.clear();
         cmbRoomType.getSelectionModel().clearSelection();
@@ -78,7 +116,6 @@ public class ManageRoomsFormController {
         txtRoomQty.clear();
         txtSearchRoomId.clear();
     }
-
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
         if(((JFXButton) mouseEvent.getSource()).getText().equals("ADD")){
             new Pulse(btnAdd).play();
@@ -94,12 +131,17 @@ public class ManageRoomsFormController {
         }
     }
 
-    public void DeleteRoomOnAction(ActionEvent actionEvent) {
-    }
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+        ValidationUtil.validate(map,btnAdd);
 
-    public void UpdateRoomOnAction(ActionEvent actionEvent) {
-    }
+        if (keyEvent.getCode()== KeyCode.ENTER){
+            Object response = ValidationUtil.validate(map,btnAdd);
+            if (response instanceof JFXTextField){
+                JFXTextField textField = (JFXTextField) response;
+                textField.requestFocus();
+            }else if (response instanceof Boolean){
 
-    public void btnClearFieldsOnAction(ActionEvent actionEvent) {
+            }
+        }
     }
 }
