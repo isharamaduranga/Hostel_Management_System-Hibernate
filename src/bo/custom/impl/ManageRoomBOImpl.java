@@ -46,4 +46,21 @@ public class ManageRoomBOImpl implements ManageRoomBO {
         return roomsDto;
     }
 
+    @Override
+    public boolean updateRoom(RoomDTO roomDTO) throws Exception {
+        RoomDAO roomDAO = new RoomDAOImpl();
+       return roomDAO.update(new Room(
+                roomDTO.getRoom_id(),
+                roomDTO.getType(),
+                roomDTO.getMonthly_rent(),
+                roomDTO.getQty()
+                ));
+    }
+
+    @Override
+    public boolean deleteRoom(String id) throws Exception {
+        RoomDAO roomDAO = new RoomDAOImpl();
+        return roomDAO.delete(id);
+    }
+
 }

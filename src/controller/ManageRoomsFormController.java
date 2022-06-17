@@ -16,8 +16,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dto.RoomDTO;
+import dto.StudentDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -38,7 +41,7 @@ public class ManageRoomsFormController {
     public JFXButton btnDelete;
     public JFXButton btnUpdate;
     public JFXButton btnClear;
-    public TableView tblRooms;
+    public TableView<RoomDTO> tblRooms;
     public TableColumn colRoomId;
     public TableColumn colRoomType;
     public TableColumn colMonthRent;
@@ -62,6 +65,11 @@ public class ManageRoomsFormController {
         try {
             comboLoad();
             setRoomDataLoad();
+            tblRooms.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue!=null){
+                    setDataFields(newValue);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,10 +93,21 @@ public class ManageRoomsFormController {
 
     }
 
+    private void setDataFields(RoomDTO newValue) {
+        txtRoomId.setText(newValue.getRoom_id());
+        cmbRoomType.setValue(newValue.getType());
+        txtMonthlyRental.setText(newValue.getMonthly_rent());
+        txtRoomQty.setText(newValue.getQty());
+
+        btnUpdate.setDisable(false);
+        btnDelete.setDisable(false);
+        btnAdd.setDisable(true);
+    }
+
     private void setRoomDataLoad() throws Exception {
         ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
         List<RoomDTO> roomDTOS = manageRoomBO.loadAllStudent();
-        ObservableList<RoomTM>observableList = FXCollections.observableArrayList();
+        ObservableList<RoomDTO>observableList = FXCollections.observableArrayList();
         for (RoomDTO roomDTO : roomDTOS) {
             observableList.add(new RoomTM(
                     roomDTO.getRoom_id(),
@@ -98,6 +117,25 @@ public class ManageRoomsFormController {
                     ));
         }
         tblRooms.setItems(observableList);
+        FilteredList<RoomDTO> filterData = new FilteredList(observableList, b -> true);
+
+        txtSearchRoomId.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(RoomDTO -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (RoomDTO.getRoom_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                else
+                    return false;
+            });
+        });
+
+        SortedList<RoomDTO> sortedData = new SortedList<>(filterData);
+        sortedData.comparatorProperty().bind(tblRooms.comparatorProperty());
+        tblRooms.setItems(sortedData);
     }
 
     private void comboLoad() {
@@ -127,12 +165,26 @@ public class ManageRoomsFormController {
 
 
 
+    public void DeleteRoomOnAction(ActionEvent actionEvent) throws Exception {
 
-
-    public void DeleteRoomOnAction(ActionEvent actionEvent) {
     }
 
-    public void UpdateRoomOnAction(ActionEvent actionEvent) {
+    public void UpdateRoomOnAction(ActionEvent actionEvent) throws Exception {
+        ManageRoomBOImpl manageRoomBO = new ManageRoomBOImpl();
+        try {
+            if (manageRoomBO.updateRoom(new RoomDTO(
+                    txtRoomId.getText(),
+                    cmbRoomType.getValue().toString(),
+                    txtMonthlyRental.getText(),
+                    txtRoomQty.getText()
+            ))) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Update it?").showAndWait();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. try again carefully!").showAndWait();
+        }
+        clear();
+        setRoomDataLoad();
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -144,6 +196,10 @@ public class ManageRoomsFormController {
         txtMonthlyRental.clear();
         txtRoomQty.clear();
         txtSearchRoomId.clear();
+        ValidationUtil.validate(map,btnAdd);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+        tblRooms.refresh();
     }
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
         if(((JFXButton) mouseEvent.getSource()).getText().equals("ADD")){

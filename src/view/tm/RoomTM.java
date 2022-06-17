@@ -8,7 +8,9 @@
 
 package view.tm;
 
-public class RoomTM {
+import dto.RoomDTO;
+
+public class RoomTM extends RoomDTO {
     private String room_id;
     private String type;
     private String monthly_rent;

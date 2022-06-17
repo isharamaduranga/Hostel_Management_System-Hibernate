@@ -31,12 +31,23 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public boolean update(Room room) throws Exception {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(room);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
-    public boolean delete(String s) throws Exception {
-        return false;
+    public boolean delete(String room_id) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Room room = session.get(Room.class, room_id);
+        session.delete(room);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override

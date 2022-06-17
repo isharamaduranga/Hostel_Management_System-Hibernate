@@ -109,7 +109,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
-      <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="251.0" layoutY="228.0" size="1.3EM" />
-      <JFXComboBox fx:id="cmbRoomType" layoutX="287.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE" />
+      <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="261.0" layoutY="228.0" size="1.3EM" />
+      <JFXComboBox fx:id="cmbRoomType" labelFloat="true" layoutX="287.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE" />
    </children>
 </AnchorPane>
