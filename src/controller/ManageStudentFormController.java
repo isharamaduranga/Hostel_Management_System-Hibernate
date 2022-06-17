@@ -8,6 +8,7 @@
 
 package controller;
 
+import animatefx.animation.ZoomIn;
 import bo.ManageStudentBOImpl;
 import bo.ManageStudentBo;
 import com.jfoenix.controls.JFXButton;
@@ -15,8 +16,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import dto.StudentDTO;
+import entity.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -26,6 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import view.tm.StudentTM;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ManageStudentFormController {
@@ -35,7 +40,7 @@ public class ManageStudentFormController {
     public JFXButton btnUpdate;
     public JFXButton btnClear;
 
-    public TableView tblStudent;
+    public TableView<StudentDTO> tblStudent;
     public TableColumn colSRegID;
     public TableColumn colStudentName;
     public TableColumn colAddress;
@@ -62,16 +67,33 @@ public class ManageStudentFormController {
         colDOB.setCellValueFactory(new PropertyValueFactory<>("date"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
+        /** tabel zoom in feature */
+        new ZoomIn(tblStudent).play();
 
 
         try {
             setStudentData();
 
+            tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue!=null){
+                    setDataFields(newValue);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         comboLoad();
+    }
+
+    private void setDataFields(StudentDTO s) {
+        txtSRejNumber.setText(s.getStudent_id());
+        txtStudentName.setText(s.getName());
+        txtSAddress.setText(s.getAddress());
+        txtContact.setText(s.getContact_no());
+        txtDateOfBirth.setValue(LocalDate.parse(s.getDate()));
+        cmbGender.setValue(s.getGender());
+
     }
 
     private void setStudentData() throws Exception {
@@ -90,6 +112,25 @@ public class ManageStudentFormController {
                     dto.getGender()));
         }
         tblStudent.setItems(tmList);
+        FilteredList<StudentDTO> filterData = new FilteredList<StudentDTO>(tmList, b -> true);
+
+        txtSearchRegisterId.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(StudentDTO -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (StudentDTO.getStudent_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                else
+                    return false;
+            });
+        });
+
+        SortedList<StudentDTO> sortedData = new SortedList<>(filterData);
+        sortedData.comparatorProperty().bind(tblStudent.comparatorProperty());
+        tblStudent.setItems(sortedData);
     }
 
     private void comboLoad() {
@@ -139,6 +180,7 @@ public class ManageStudentFormController {
         txtContact.clear();
         txtDateOfBirth.getEditor().clear();
         cmbGender.getSelectionModel().clearSelection();
+        txtSearchRegisterId.clear();
     }
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
