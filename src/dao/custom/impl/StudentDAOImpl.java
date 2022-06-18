@@ -15,6 +15,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.FactoryConfiguration;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -65,5 +67,17 @@ public class StudentDAOImpl implements StudentDAO {
         transaction.commit();
         session.close();
         return studentList;
+    }
+
+    @Override
+    public List getStudentIds() throws IOException {
+        List<String> sIds = new ArrayList<>();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Query sessionQuery = session.createQuery("SELECT student_id FROM Student ");
+        sIds=sessionQuery.list();
+        transaction.commit();
+        session.close();
+        return sIds;
     }
 }

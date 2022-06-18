@@ -8,6 +8,8 @@
 
 package controller;
 
+import bo.custom.RegisterStudentBO;
+import bo.custom.impl.RegisterStudentBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -15,6 +17,8 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class RegisterStudentFormController {
     public JFXButton btnRegister;
@@ -34,10 +38,35 @@ public class RegisterStudentFormController {
     public JFXTextField txtDob;
     public JFXTextField txtKeyMoney;
 
+    public void initialize(){
+        try {
+            loadStudentIds();
+            loadRoomIds();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void loadRoomIds() throws IOException {
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        cmbRoomID.getItems().addAll(registerStudentBO.getRoomIds());
+
+    }
+
+    private void loadStudentIds() throws IOException {
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        cmb_StudentID.getItems().addAll(registerStudentBO.getStudentIds());
+
+    }
+
     public void rejisterOnAction(ActionEvent actionEvent) {
+
     }
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
 
     }
+
 }
