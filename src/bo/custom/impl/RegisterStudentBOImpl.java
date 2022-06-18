@@ -13,6 +13,8 @@ import dao.custom.RoomDAO;
 import dao.custom.StudentDAO;
 import dao.custom.impl.RoomDAOImpl;
 import dao.custom.impl.StudentDAOImpl;
+import entity.Room;
+import entity.Student;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +24,7 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
     @Override
     public List getStudentIds() throws IOException {
         StudentDAO studentDAO = new StudentDAOImpl();
-      return studentDAO.getStudentIds();
+        return studentDAO.getStudentIds();
 
     }
 
@@ -31,4 +33,17 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
         RoomDAO roomDAO = new RoomDAOImpl();
         return roomDAO.getRoomIds();
     }
+
+    @Override
+    public Student getStudent(String id) throws Exception {
+        StudentDAO studentDAO = new StudentDAOImpl();
+        return studentDAO.find(id);
+    }
+
+    @Override
+    public Room getRoom(String id) throws Exception {
+        RoomDAO roomDAO = new RoomDAOImpl();
+        return roomDAO.find(id);
+    }
+
 }
