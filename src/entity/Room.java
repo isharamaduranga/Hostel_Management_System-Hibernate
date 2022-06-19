@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Room {
+public class Room  {
     @Id
     private String room_id;
     private String type;
@@ -28,5 +28,12 @@ public class Room {
     private int qty;
 
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
-    private List<RoomReservation> reservations;
+    private List<RoomReservation> roomDetails;
+
+    public Room(String room_id, String type, double monthly_rent, int qty) {
+        this.room_id = room_id;
+        this.type = type;
+        this.monthly_rent = monthly_rent;
+        this.qty = qty;
+    }
 }

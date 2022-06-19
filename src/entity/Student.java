@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Student  {
+public class Student {
     @Id
     private String student_id;
     private String name;
@@ -30,6 +30,15 @@ public class Student  {
     private String gender;
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
     private List<RoomReservation> reservations ;
+
+    public Student(String student_id, String name, String address, String contact_no, String date, String gender) {
+        this.student_id = student_id;
+        this.name = name;
+        this.address = address;
+        this.contact_no = contact_no;
+        this.date = date;
+        this.gender = gender;
+    }
 
 
 }

@@ -16,14 +16,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-public class RoomReservation {
+public class RoomReservation implements SuperEntity {
     @Id
     private String res_id;
     private LocalDate date;
     private double key_money;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id",referencedColumnName = "customer_id")
+    @JoinColumn(name = "student_id",referencedColumnName = "student_id")
     private Student student;
 
     @ManyToOne(fetch = FetchType.EAGER)
