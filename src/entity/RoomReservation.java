@@ -8,9 +8,26 @@
 
 package entity;
 
+import lombok.*;
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
 public class RoomReservation {
+    @Id
     private String res_id;
     private LocalDate date;
+    private double key_money;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id",referencedColumnName = "customer_id")
+    private Student student;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_id",referencedColumnName = "room_id")
+    private Room room;
+
 }

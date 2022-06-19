@@ -10,8 +10,11 @@ package entity;
 
 import lombok.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +28,8 @@ public class Student  {
     private String contact_no;
     private String date;
     private String gender;
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    private List<RoomReservation> reservations ;
 
 
 }

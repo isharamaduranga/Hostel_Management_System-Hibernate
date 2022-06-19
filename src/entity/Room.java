@@ -10,8 +10,11 @@ package entity;
 
 import lombok.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +26,7 @@ public class Room {
     private String type;
     private double monthly_rent;
     private int qty;
+
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
+    private List<RoomReservation> reservations;
 }
