@@ -64,7 +64,7 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="417.0" layoutY="427.0" prefHeight="31.0" prefWidth="211.0" promptText="MONTHLY RENT" unFocusColor="#6944ee">
+      <JFXTextField fx:id="txtKeyMoney" labelFloat="true" layoutX="417.0" layoutY="427.0" prefHeight="31.0" prefWidth="211.0" promptText="KEY MONEY" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
@@ -94,11 +94,6 @@
       <JFXTextField fx:id="txtDob" labelFloat="true" layoutX="87.0" layoutY="540.0" prefHeight="31.0" prefWidth="211.0" promptText="DATE OF BIRTH" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txtKeyMoney" labelFloat="true" layoutX="679.0" layoutY="513.0" prefHeight="39.0" prefWidth="337.0" promptText="PLEASE ENTER WILL YO PAY KEY MONEY" unFocusColor="#f80000">
-         <font>
-            <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextField>
    </children>

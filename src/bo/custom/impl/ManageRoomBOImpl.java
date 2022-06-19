@@ -25,7 +25,7 @@ public class ManageRoomBOImpl implements ManageRoomBO {
        return roomDAO.add(new Room(
                roomDTO.getRoom_id(),
                roomDTO.getType(),
-               roomDTO.getMonthly_rent(),
+               roomDTO.getKey_money(),
                roomDTO.getQty()
         ));
     }
@@ -39,7 +39,7 @@ public class ManageRoomBOImpl implements ManageRoomBO {
         for (Room room : all) {
             roomsDto.add(new RoomDTO(room.getRoom_id(),
                     room.getType(),
-                    room.getMonthly_rent(),
+                    room.getKey_money(),
                     room.getQty()
                     ));
         }
@@ -52,7 +52,7 @@ public class ManageRoomBOImpl implements ManageRoomBO {
        return roomDAO.update(new Room(
                 roomDTO.getRoom_id(),
                 roomDTO.getType(),
-                roomDTO.getMonthly_rent(),
+                roomDTO.getKey_money(),
                 roomDTO.getQty()
                 ));
     }

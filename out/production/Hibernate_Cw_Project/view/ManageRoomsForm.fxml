@@ -80,7 +80,7 @@
          <columns>
             <TableColumn fx:id="colRoomId" prefWidth="204.0" text="ROOM ID" />
             <TableColumn fx:id="colRoomType" prefWidth="269.0" text="ROOM TYPE" />
-            <TableColumn fx:id="colMonthRent" prefWidth="267.0" text="MONTHLEY RENTEL (LKR)" />
+            <TableColumn fx:id="colKeyMoney" prefWidth="267.0" text="KEY MONEY (LKR)" />
             <TableColumn fx:id="colRoomQty" prefWidth="267.0" text="ROOMS COUNT" />
          </columns>
       </TableView>
@@ -89,7 +89,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtMonthlyRental" labelFloat="true" layoutX="553.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="MONTHLEY RENTAL(LKR)">
+      <JFXTextField fx:id="txtKeyMoney" labelFloat="true" layoutX="553.0" layoutY="113.0" onKeyReleased="#textFields_Key_Released" prefHeight="39.0" prefWidth="230.0" promptText="KEY MONEY(LKR)">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>

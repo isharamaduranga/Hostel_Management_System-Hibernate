@@ -9,7 +9,6 @@
 package controller;
 
 import animatefx.animation.Bounce;
-import animatefx.animation.Pulse;
 import bo.custom.RegisterStudentBO;
 import bo.custom.impl.RegisterStudentBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -36,7 +35,6 @@ public class RegisterStudentFormController {
     public JFXTextField txtGender;
     public JFXComboBox<String> cmbRoomID;
     public JFXTextField txtRoomType;
-    public JFXTextField txtMonthRent;
     public JFXTextField txtQty;
     public Label roomAvailableStatus;
     public JFXTextField txtDob;
@@ -74,7 +72,7 @@ public class RegisterStudentFormController {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         Room room = registerStudentBO.getRoom(id);
         txtRoomType.setText(room.getType());
-        txtMonthRent.setText(String.valueOf(room.getMonthly_rent()));
+        txtKeyMoney.setText(String.valueOf(room.getKey_money()));
         txtQty.setText(String.valueOf(room.getQty()));
 
     }
@@ -104,6 +102,8 @@ public class RegisterStudentFormController {
     }
 
     public void rejisterOnAction(ActionEvent actionEvent) {
+
+
 
     }
 

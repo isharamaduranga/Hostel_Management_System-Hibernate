@@ -13,19 +13,19 @@ import java.time.LocalDate;
 public class RoomReservationDTO {
     private String res_id;
     private LocalDate date;
-    private double key_money;
     private String student_id;
     private String room_id;
+    private String status;
 
     public RoomReservationDTO() {
     }
 
-    public RoomReservationDTO(String res_id, LocalDate date, double key_money, String student_id, String room_id) {
+    public RoomReservationDTO(String res_id, LocalDate date, String student_id, String room_id, String status) {
         this.res_id = res_id;
         this.date = date;
-        this.key_money = key_money;
         this.student_id = student_id;
         this.room_id = room_id;
+        this.status = status;
     }
 
     public String getRes_id() {
@@ -44,14 +44,6 @@ public class RoomReservationDTO {
         this.date = date;
     }
 
-    public double getKey_money() {
-        return key_money;
-    }
-
-    public void setKey_money(double key_money) {
-        this.key_money = key_money;
-    }
-
     public String getStudent_id() {
         return student_id;
     }
@@ -68,14 +60,22 @@ public class RoomReservationDTO {
         this.room_id = room_id;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "RoomReservationDTO{" +
                 "res_id='" + res_id + '\'' +
                 ", date=" + date +
-                ", key_money=" + key_money +
                 ", student_id='" + student_id + '\'' +
                 ", room_id='" + room_id + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

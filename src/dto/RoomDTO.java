@@ -11,16 +11,16 @@ package dto;
 public class RoomDTO {
     private String room_id;
     private String type;
-    private double monthly_rent;
+    private double key_money;
     private int qty;
 
     public RoomDTO() {
     }
 
-    public RoomDTO(String room_id, String type, double monthly_rent, int qty) {
+    public RoomDTO(String room_id, String type, double key_money, int qty) {
         this.room_id = room_id;
         this.type = type;
-        this.monthly_rent = monthly_rent;
+        this.key_money = key_money;
         this.qty = qty;
     }
 
@@ -40,12 +40,12 @@ public class RoomDTO {
         this.type = type;
     }
 
-    public double getMonthly_rent() {
-        return monthly_rent;
+    public double getKey_money() {
+        return key_money;
     }
 
-    public void setMonthly_rent(double monthly_rent) {
-        this.monthly_rent = monthly_rent;
+    public void setKey_money(double key_money) {
+        this.key_money = key_money;
     }
 
     public int getQty() {
@@ -61,7 +61,7 @@ public class RoomDTO {
         return "RoomDTO{" +
                 "room_id='" + room_id + '\'' +
                 ", type='" + type + '\'' +
-                ", monthly_rent=" + monthly_rent +
+                ", key_money=" + key_money +
                 ", qty=" + qty +
                 '}';
     }

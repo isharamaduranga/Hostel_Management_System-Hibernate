@@ -16,7 +16,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dto.RoomDTO;
-import dto.StudentDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -44,13 +43,15 @@ public class ManageRoomsFormController {
     public TableView<RoomDTO> tblRooms;
     public TableColumn colRoomId;
     public TableColumn colRoomType;
-    public TableColumn colMonthRent;
+    public TableColumn colKeyMoney;
     public TableColumn colRoomQty;
     public JFXTextField txtRoomId;
-    public JFXTextField txtMonthlyRental;
+    public JFXTextField txtKeyMoney;
     public JFXTextField txtRoomQty;
     public JFXTextField txtSearchRoomId;
     public JFXComboBox cmbRoomType;
+
+
 
     /** Define Linked-HashMap for the validation  */
     LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
@@ -77,17 +78,17 @@ public class ManageRoomsFormController {
         /** create validation pattern*/
         //Create a pattern and compile it to use
         Pattern idPattern = Pattern.compile("^(RM-)[0-9]{3,5}$");
-        Pattern rentPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{2})?$");
+        Pattern keyMoneyPattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{2})?$");
         Pattern qtyPattern = Pattern.compile("^[0-9]{1,}$");
 
         //add pattern and text to the map
         map.put(txtRoomId,idPattern);
-        map.put(txtMonthlyRental,rentPattern);
+        map.put(txtKeyMoney,keyMoneyPattern);
         map.put(txtRoomQty,qtyPattern);
 
         colRoomId.setCellValueFactory(new PropertyValueFactory<>("room_id"));
         colRoomType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        colMonthRent.setCellValueFactory(new PropertyValueFactory<>("monthly_rent"));
+        colKeyMoney.setCellValueFactory(new PropertyValueFactory<>("key_money"));
         colRoomQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
 
 
@@ -96,7 +97,7 @@ public class ManageRoomsFormController {
     private void setDataFields(RoomDTO newValue) {
         txtRoomId.setText(newValue.getRoom_id());
         cmbRoomType.setValue(newValue.getType());
-        txtMonthlyRental.setText(String.valueOf(newValue.getMonthly_rent()));
+        txtKeyMoney.setText(String.valueOf(newValue.getKey_money()));
         txtRoomQty.setText(String.valueOf(newValue.getQty()));
 
         btnUpdate.setDisable(false);
@@ -112,7 +113,7 @@ public class ManageRoomsFormController {
             observableList.add(new RoomTM(
                     roomDTO.getRoom_id(),
                     roomDTO.getType(),
-                    roomDTO.getMonthly_rent(),
+                    roomDTO.getKey_money(),
                     roomDTO.getQty()
                     ));
         }
@@ -151,7 +152,7 @@ public class ManageRoomsFormController {
         try {
             if (manageRoomBO.add(new RoomDTO(txtRoomId.getText(),
                     cmbRoomType.getValue().toString(),
-                    Double.parseDouble(txtMonthlyRental.getText()),
+                    Double.parseDouble(txtKeyMoney.getText()),
                    Integer.parseInt(txtRoomQty.getText())
                     ))) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Room Saved... Successfully").showAndWait();
@@ -184,7 +185,7 @@ public class ManageRoomsFormController {
             if (manageRoomBO.updateRoom(new RoomDTO(
                     txtRoomId.getText(),
                     cmbRoomType.getValue().toString(),
-                    Double.parseDouble(txtMonthlyRental.getText()),
+                    Double.parseDouble(txtKeyMoney.getText()),
                     Integer.parseInt(txtRoomQty.getText())
             ))) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Update it?").showAndWait();
@@ -202,7 +203,7 @@ public class ManageRoomsFormController {
     public void clear(){
         txtRoomId.clear();
         cmbRoomType.getSelectionModel().clearSelection();
-        txtMonthlyRental.clear();
+        txtKeyMoney.clear();
         txtRoomQty.clear();
         txtSearchRoomId.clear();
         ValidationUtil.validate(map,btnAdd);

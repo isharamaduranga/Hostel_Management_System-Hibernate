@@ -33,7 +33,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="420.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="MONTHLY RENT">
+      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="420.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="KEY MONEY">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>

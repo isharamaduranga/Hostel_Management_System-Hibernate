@@ -20,7 +20,6 @@ public class RoomReservation implements SuperEntity {
     @Id
     private String res_id;
     private LocalDate date;
-    private double key_money;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id",referencedColumnName = "student_id")
@@ -29,5 +28,6 @@ public class RoomReservation implements SuperEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id",referencedColumnName = "room_id")
     private Room room;
+    private String status;
 
 }
