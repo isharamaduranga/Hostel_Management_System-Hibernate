@@ -74,8 +74,8 @@ public class RegisterStudentFormController {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         Room room = registerStudentBO.getRoom(id);
         txtRoomType.setText(room.getType());
-        txtMonthRent.setText(room.getMonthly_rent());
-        txtQty.setText(room.getQty());
+        txtMonthRent.setText(String.valueOf(room.getMonthly_rent()));
+        txtQty.setText(String.valueOf(room.getQty()));
 
     }
 

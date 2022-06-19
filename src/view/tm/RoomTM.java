@@ -13,18 +13,19 @@ import dto.RoomDTO;
 public class RoomTM extends RoomDTO {
     private String room_id;
     private String type;
-    private String monthly_rent;
-    private String qty;
+    private double monthly_rent;
+    private int qty;
 
     public RoomTM() {
     }
 
-    public RoomTM(String room_id, String type, String monthly_rent, String qty) {
-        this.room_id = room_id;
-        this.type = type;
-        this.monthly_rent = monthly_rent;
-        this.qty = qty;
+    public RoomTM(String room_id, String type, double monthly_rent, int qty) {
+        this.setRoom_id(room_id);
+        this.setType(type);
+        this.setMonthly_rent(monthly_rent);
+        this.setQty(qty);
     }
+
 
     public String getRoom_id() {
         return room_id;
@@ -42,19 +43,19 @@ public class RoomTM extends RoomDTO {
         this.type = type;
     }
 
-    public String getMonthly_rent() {
+    public double getMonthly_rent() {
         return monthly_rent;
     }
 
-    public void setMonthly_rent(String monthly_rent) {
+    public void setMonthly_rent(double monthly_rent) {
         this.monthly_rent = monthly_rent;
     }
 
-    public String getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 
@@ -63,8 +64,8 @@ public class RoomTM extends RoomDTO {
         return "RoomTM{" +
                 "room_id='" + room_id + '\'' +
                 ", type='" + type + '\'' +
-                ", monthly_rent='" + monthly_rent + '\'' +
-                ", qty='" + qty + '\'' +
+                ", monthly_rent=" + monthly_rent +
+                ", qty=" + qty +
                 '}';
     }
 }

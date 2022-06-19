@@ -44,31 +44,31 @@
       <JFXComboBox fx:id="cmb_StudentID" layoutX="58.0" layoutY="226.0" prefHeight="39.0" prefWidth="269.0" promptText="STUDENT REGISTER NUMBER" styleClass="list-cell" stylesheets="@css/color.css" />
       <JFXComboBox fx:id="cmbRoomID" layoutX="388.0" layoutY="226.0" prefHeight="39.0" prefWidth="269.0" promptText="SELECT ROOM ID" styleClass="list-cell" stylesheets="@css/color.css" />
       <JFXDatePicker fx:id="date" defaultColor="#ff00a6" layoutX="726.0" layoutY="226.0" prefHeight="39.0" prefWidth="269.0" promptText="REGISTER DATE" styleClass="list-cell" stylesheets="@css/color.css" />
-      <JFXTextField fx:id="txtSname" labelFloat="true" layoutX="87.0" layoutY="347.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT NAME">
+      <JFXTextField fx:id="txtSname" labelFloat="true" layoutX="87.0" layoutY="347.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT NAME" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="87.0" layoutY="412.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT ADDRESS">
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="87.0" layoutY="412.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT ADDRESS" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="87.0" layoutY="474.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT CONTACT">
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="87.0" layoutY="474.0" prefHeight="31.0" prefWidth="211.0" promptText="STUDENT CONTACT" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtGender" labelFloat="true" layoutX="87.0" layoutY="602.0" prefHeight="31.0" prefWidth="211.0" promptText="GENDER">
+      <JFXTextField fx:id="txtGender" labelFloat="true" layoutX="87.0" layoutY="602.0" prefHeight="31.0" prefWidth="211.0" promptText="GENDER" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtRoomType" labelFloat="true" layoutX="417.0" layoutY="355.0" prefHeight="31.0" prefWidth="211.0" promptText="ROOM TYPE">
+      <JFXTextField fx:id="txtRoomType" labelFloat="true" layoutX="417.0" layoutY="355.0" prefHeight="31.0" prefWidth="211.0" promptText="ROOM TYPE" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="417.0" layoutY="427.0" prefHeight="31.0" prefWidth="211.0" promptText="MONTHLY RENT">
+      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="417.0" layoutY="427.0" prefHeight="31.0" prefWidth="211.0" promptText="MONTHLY RENT" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="417.0" layoutY="498.0" prefHeight="31.0" prefWidth="211.0" promptText="QUENTITY">
+      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="417.0" layoutY="498.0" prefHeight="31.0" prefWidth="211.0" promptText="QUENTITY" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
@@ -91,7 +91,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtDob" labelFloat="true" layoutX="87.0" layoutY="540.0" prefHeight="31.0" prefWidth="211.0" promptText="DATE OF BIRTH">
+      <JFXTextField fx:id="txtDob" labelFloat="true" layoutX="87.0" layoutY="540.0" prefHeight="31.0" prefWidth="211.0" promptText="DATE OF BIRTH" unFocusColor="#6944ee">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

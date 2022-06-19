@@ -96,8 +96,8 @@ public class ManageRoomsFormController {
     private void setDataFields(RoomDTO newValue) {
         txtRoomId.setText(newValue.getRoom_id());
         cmbRoomType.setValue(newValue.getType());
-        txtMonthlyRental.setText(newValue.getMonthly_rent());
-        txtRoomQty.setText(newValue.getQty());
+        txtMonthlyRental.setText(String.valueOf(newValue.getMonthly_rent()));
+        txtRoomQty.setText(String.valueOf(newValue.getQty()));
 
         btnUpdate.setDisable(false);
         btnDelete.setDisable(false);
@@ -151,8 +151,8 @@ public class ManageRoomsFormController {
         try {
             if (manageRoomBO.add(new RoomDTO(txtRoomId.getText(),
                     cmbRoomType.getValue().toString(),
-                    txtMonthlyRental.getText(),
-                    txtRoomQty.getText()
+                    Double.parseDouble(txtMonthlyRental.getText()),
+                   Integer.parseInt(txtRoomQty.getText())
                     ))) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Room Saved... Successfully").showAndWait();
             }
@@ -184,8 +184,8 @@ public class ManageRoomsFormController {
             if (manageRoomBO.updateRoom(new RoomDTO(
                     txtRoomId.getText(),
                     cmbRoomType.getValue().toString(),
-                    txtMonthlyRental.getText(),
-                    txtRoomQty.getText()
+                    Double.parseDouble(txtMonthlyRental.getText()),
+                    Integer.parseInt(txtRoomQty.getText())
             ))) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Update it?").showAndWait();
             }

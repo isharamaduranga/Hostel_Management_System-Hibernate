@@ -21,6 +21,6 @@ public class Room {
     @Id
     private String room_id;
     private String type;
-    private String monthly_rent;
-    private String qty;
+    private double monthly_rent;
+    private int qty;
 }
