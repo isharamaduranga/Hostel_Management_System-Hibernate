@@ -2,6 +2,7 @@ package bo.custom;
 
 import dao.custom.RoomDAO;
 import dao.custom.impl.RoomDAOImpl;
+import dto.RoomReservationDTO;
 import entity.Room;
 import entity.Student;
 
@@ -15,4 +16,5 @@ public interface RegisterStudentBO {
      Student getStudent(String id) throws Exception;
      Room getRoom(String id) throws Exception ;
      String generateNewReservationID() throws SQLException, ClassNotFoundException, IOException;
+     boolean addReservation(RoomReservationDTO reservationDTO) throws Exception ;
 }

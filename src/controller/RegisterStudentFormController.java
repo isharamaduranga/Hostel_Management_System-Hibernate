@@ -15,9 +15,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import dto.RoomReservationDTO;
 import entity.Room;
 import entity.Student;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
@@ -102,8 +104,22 @@ public class RegisterStudentFormController {
 
     }
 
-    public void rejisterOnAction(ActionEvent actionEvent) {
-        generateNewReservationID();
+    public void rejisterOnAction(ActionEvent actionEvent) throws Exception {
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        if (registerStudentBO.addReservation(new RoomReservationDTO(
+                txtRejFormNum.getText(),
+                date.getValue(),
+                cmb_StudentID.getValue(),
+                cmbRoomID.getValue(),
+                roomAvailableStatus.getText()
+        ))) {
+            generateNewReservationID();
+            new Alert(Alert.AlertType.CONFIRMATION, " Saved..Registration Successfully?").showAndWait();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Pleases try again !").showAndWait();
+        }
+
+
 
     }
     public void generateNewReservationID(){

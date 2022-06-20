@@ -15,7 +15,9 @@ import dao.custom.StudentDAO;
 import dao.custom.impl.RoomDAOImpl;
 import dao.custom.impl.RoomReservationDAOImpl;
 import dao.custom.impl.StudentDAOImpl;
+import dto.RoomReservationDTO;
 import entity.Room;
+import entity.RoomReservation;
 import entity.Student;
 
 import java.io.IOException;
@@ -55,4 +57,15 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
         return roomReservationDAO.generateNewId();
     }
 
+    @Override
+    public boolean addReservation(RoomReservationDTO reservationDTO) throws Exception {
+        RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
+        return roomReservationDAO.add(new RoomReservation(
+                reservationDTO.getRes_id(),
+                reservationDTO.getDate(),
+               new Student(reservationDTO.getStudent_id()) ,
+               new Room(reservationDTO.getRoom_id()),
+                reservationDTO.getStatus()
+                ));
+    }
 }

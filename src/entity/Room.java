@@ -36,4 +36,8 @@ public class Room  {
         this.key_money = key_money;
         this.qty = qty;
     }
+
+    public Room(String room_id) {
+        this.room_id = room_id;
+    }
 }

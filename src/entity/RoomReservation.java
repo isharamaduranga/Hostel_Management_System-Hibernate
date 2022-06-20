@@ -30,4 +30,5 @@ public class RoomReservation implements SuperEntity {
     private Room room;
     private String status;
 
+
 }

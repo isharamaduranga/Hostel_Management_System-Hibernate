@@ -9,6 +9,7 @@
 package dao.custom.impl;
 
 import dao.custom.RoomReservationDAO;
+import entity.RoomReservation;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -28,7 +29,7 @@ public class RoomReservationDAOImpl implements RoomReservationDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createSQLQuery("SELECT res_id FROM RoomReservation ORDER BY res_id DESC LIMIT 1");
-        if (query.isCallable()) {
+        if (query.isCacheable()) {
             String rnno = String.valueOf(query);
             int co = rnno.length();
             String txt = rnno.substring(0, 2);//mul deka  (RI)
@@ -44,5 +45,35 @@ public class RoomReservationDAOImpl implements RoomReservationDAO {
         } else {
             return "RI1000";
         }
+    }
+
+    @Override
+    public boolean add(RoomReservation entity) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(entity);
+        transaction.commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean update(RoomReservation roomReservation) throws Exception {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws Exception {
+        return false;
+    }
+
+    @Override
+    public RoomReservation find(String s) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<RoomReservation> findAll() throws Exception {
+        return null;
     }
 }
