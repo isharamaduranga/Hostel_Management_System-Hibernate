@@ -29,22 +29,11 @@ public class RoomReservationDAOImpl implements RoomReservationDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery query = session.createSQLQuery("SELECT res_id FROM RoomReservation ORDER BY res_id DESC LIMIT 1");
-        if (query.isCacheable()) {
-            String rnno = String.valueOf(query);
-            int co = rnno.length();
-            String txt = rnno.substring(0, 2);//mul deka  (RI)
-            String num = rnno.substring(2, co);//aga deaka (1000)
-
-            int n = Integer.parseInt(num);
-            n++;
-            String snum = Integer.toString(n);
-            String newID = txt + snum;
+            String id = (String) query.uniqueResult();
+            int newCustomerId = Integer.parseInt(id.replace("RID-", "")) + 1;
             transaction.commit();
-            session.close();
-            return newID;
-        } else {
-            return "RI1000";
-        }
+            return String.format("RID-%03d", newCustomerId);
+
     }
 
     @Override

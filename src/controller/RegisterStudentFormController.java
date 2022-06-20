@@ -105,22 +105,26 @@ public class RegisterStudentFormController {
     }
 
     public void rejisterOnAction(ActionEvent actionEvent) throws Exception {
+
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
-        if (registerStudentBO.addReservation(new RoomReservationDTO(
-                txtRejFormNum.getText(),
-                date.getValue(),
-                cmb_StudentID.getValue(),
-                cmbRoomID.getValue(),
-                roomAvailableStatus.getText()
-        ))) {
-            generateNewReservationID();
-            new Alert(Alert.AlertType.CONFIRMATION, " Saved..Registration Successfully?").showAndWait();
-        }else {
+        if(cmb_StudentID.getSelectionModel().isEmpty()|| cmbRoomID.getSelectionModel().isEmpty() || date.getValue()==null){
             new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Pleases try again !").showAndWait();
+        }else {
+            if (registerStudentBO.addReservation(new RoomReservationDTO(
+                    txtRejFormNum.getText(),
+                    date.getValue(),
+                    cmb_StudentID.getValue(),
+                    cmbRoomID.getValue(),
+                    roomAvailableStatus.getText()
+            ))) {
+
+                new Alert(Alert.AlertType.INFORMATION, " Saved..Registration Successfully?").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Pleases try again !").showAndWait();
+            }
+            clear();
+            generateNewReservationID();
         }
-
-
-
     }
     public void generateNewReservationID(){
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
@@ -134,6 +138,17 @@ public class RegisterStudentFormController {
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
         new Bounce(btnRegister).play();
+    }
+    public void clear(){
+
+       txtSname.clear();
+       txtAddress.clear();
+       txtContact.clear();
+       txtDob.clear();
+       txtGender.clear();
+       txtRoomType.clear();
+       txtKeyMoney.clear();
+       txtQty.clear();
     }
 
 }
