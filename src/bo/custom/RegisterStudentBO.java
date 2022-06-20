@@ -6,6 +6,7 @@ import entity.Room;
 import entity.Student;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface RegisterStudentBO {
@@ -13,4 +14,5 @@ public interface RegisterStudentBO {
      List getRoomIds() throws IOException;
      Student getStudent(String id) throws Exception;
      Room getRoom(String id) throws Exception ;
+     String generateNewReservationID() throws SQLException, ClassNotFoundException, IOException;
 }

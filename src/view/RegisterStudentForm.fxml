@@ -72,7 +72,7 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="652.0" layoutY="346.0" prefHeight="51.0" prefWidth="368.0" text="R O O M   A V A I L A B I L I T Y">
+      <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="652.0" layoutY="354.0" prefHeight="51.0" prefWidth="368.0" text="R O O M   A V A I L A B I L I T Y">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -86,7 +86,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="705.0" layoutY="398.0" prefHeight="61.0" prefWidth="219.0" text="AVAILABLE" textAlignment="CENTER" textFill="#00bf30">
+      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="709.0" layoutY="444.0" prefHeight="61.0" prefWidth="219.0" text="AVAILABLE" textAlignment="CENTER" textFill="#00bf30">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

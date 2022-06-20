@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RegisterStudentFormController {
     public JFXButton btnRegister;
@@ -44,7 +45,7 @@ public class RegisterStudentFormController {
         try {
             loadStudentIds();
             loadRoomIds();
-
+            generateNewReservationID();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,9 +103,17 @@ public class RegisterStudentFormController {
     }
 
     public void rejisterOnAction(ActionEvent actionEvent) {
+        generateNewReservationID();
 
-
-
+    }
+    public void generateNewReservationID(){
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        try {
+            String s = registerStudentBO.generateNewReservationID();
+            txtRejFormNum.setText(s);
+        } catch (SQLException| ClassNotFoundException |IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
