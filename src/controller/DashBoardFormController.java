@@ -15,8 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.NavigationUtil;
@@ -32,10 +36,13 @@ public class DashBoardFormController {
     public Label lblDay;
     public Label lblTime;
     public AnchorPane dashBoardContext;
+    public Pane UserPane;
+    public BorderPane FullBoardContext;
 
 
 
     public void initialize(){
+        UserPane.setVisible(false);
         loadTimeDate();
     }
 
@@ -87,5 +94,21 @@ public class DashBoardFormController {
 
     public void shutDownOnAction(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    public void btnUserDetailsMouseClickOnaction(MouseEvent mouseEvent) {
+        UserPane.setVisible(true);
+        UserPane.setEffect(null);
+        FullBoardContext.setEffect(new BoxBlur(3,3,3));
+
+    }
+
+    public void uiCloseOnAction(MouseEvent mouseEvent) {
+        UserPane.setVisible(false);
+        FullBoardContext.setEffect(null);
+    }
+
+    public void btnChangeUserDetails(ActionEvent actionEvent) {
+
     }
 }

@@ -24,7 +24,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="btnRegister" layoutX="433.0" layoutY="625.0" onAction="#rejisterOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="61.0" prefWidth="249.0" style="-fx-background-radius: 2.0EM;" styleClass="buttonAdd" stylesheets="@css/color.css" text="R E G I S T E R" textFill="WHITE">
+      <JFXButton fx:id="btnRegister" layoutX="700.0" layoutY="590.0" onAction="#rejisterOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="61.0" prefWidth="321.0" style="-fx-background-radius: 2.0EM;" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="R E G I S T E R" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -72,7 +72,7 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></JFXTextField>
-      <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="652.0" layoutY="354.0" prefHeight="51.0" prefWidth="368.0" text="R O O M   A V A I L A B I L I T Y">
+      <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="665.0" layoutY="353.0" prefHeight="51.0" prefWidth="368.0" text="R O O M   A V A I L A B I L I T Y">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -96,5 +96,17 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
+      <JFXButton fx:id="btnClear" layoutX="399.0" layoutY="595.0" onAction="#btnClearOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="51.0" prefWidth="247.0" style="-fx-background-radius: 2.0EM;" styleClass="buttonSearch" stylesheets="@css/color.css" text=" C L E A R   F I E L D S" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clear.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

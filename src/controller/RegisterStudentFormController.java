@@ -22,14 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
-import util.FactoryConfiguration;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class RegisterStudentFormController {
@@ -48,70 +42,67 @@ public class RegisterStudentFormController {
     public Label roomAvailableStatus;
     public JFXTextField txtDob;
     public JFXTextField txtKeyMoney;
+    public JFXButton btnClear;
+    int roomCount;
 
-    public void initialize(){
+    public void initialize() {
         try {
             loadStudentIds();
             loadRoomIds();
             generateNewReservationID();
-
+            btnRegister.setDisable(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         cmb_StudentID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                setStudentDataToFields(newValue);
+            if(newValue!=null){
+                try {
+                    setStudentDataToFields(newValue);
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
         });
 
         cmbRoomID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                setRoomDataToFields(newValue);
-                availableRoomCheckingLogic(newValue);
-                count(newValue);
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            if(newValue!=null){
+                try {
+                    setRoomDataToFields(newValue);
+                    availableRoomCheckingLogic(newValue);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
         });
 
     }
 
+    private void availableRoomCheckingLogic(String rid) throws IOException {
 
-    private void count(String rid) throws IOException {
-       /* String temp;
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        NativeQuery sqlQuery = session.createSQLQuery("select count(room_id) from roomreservation where room_id = :room_type");
-        sqlQuery.setParameter("room_type",rid);
-        temp = String.valueOf(sqlQuery.uniqueResult());
-        transaction.commit();*/
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         try {
             String RoomTypeCount = registerStudentBO.generateRoomAvailableStatus(rid);
-            int count= Integer.parseInt(RoomTypeCount);
-            if (count>=roomCount){
+            int count = Integer.parseInt(RoomTypeCount);
+
+            if (count >= roomCount) {
                 roomAvailableStatus.setText("NOT AVAILABLE");
-            }else{
+                new Alert(Alert.AlertType.WARNING, "That " + rid + " Room is Out Of Quantity..!!!").showAndWait();
+                btnRegister.setDisable(true);
+            } else {
                 roomAvailableStatus.setText("AVAILABLE");
+                btnRegister.setDisable(false);
             }
 
-        } catch (SQLException |ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    private void availableRoomCheckingLogic(String newValue) throws IOException {
-
-
-    }
-
-    int roomCount;
     private void setRoomDataToFields(String id) throws Exception {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         Room room = registerStudentBO.getRoom(id);
@@ -120,7 +111,7 @@ public class RegisterStudentFormController {
         txtQty.setText(String.valueOf(room.getQty()));
 
         /**Find RoomQty  According to various room Types*/
-        roomCount= Integer.parseInt(txtQty.getText());
+        roomCount = Integer.parseInt(txtQty.getText());
 
     }
 
@@ -133,14 +124,11 @@ public class RegisterStudentFormController {
         txtContact.setText(student.getContact_no());
         txtDob.setText(student.getDate());
         txtGender.setText(student.getGender());
-
     }
-
 
     private void loadRoomIds() throws IOException {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         cmbRoomID.getItems().addAll(registerStudentBO.getRoomIds());
-
     }
 
     private void loadStudentIds() throws IOException {
@@ -152,9 +140,9 @@ public class RegisterStudentFormController {
     public void rejisterOnAction(ActionEvent actionEvent) throws Exception {
 
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
-        if(cmb_StudentID.getSelectionModel().isEmpty()|| cmbRoomID.getSelectionModel().isEmpty() || date.getValue()==null){
+        if (roomAvailableStatus.equals("NOT AVAILABLE") | cmb_StudentID.getSelectionModel().isEmpty() || cmbRoomID.getSelectionModel().isEmpty() || date.getValue() == null) {
             new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Pleases try again !").showAndWait();
-        }else {
+        } else {
             if (registerStudentBO.addReservation(new RoomReservationDTO(
                     txtRejFormNum.getText(),
                     date.getValue(),
@@ -171,12 +159,13 @@ public class RegisterStudentFormController {
             generateNewReservationID();
         }
     }
-    public void generateNewReservationID(){
+
+    public void generateNewReservationID() {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         try {
             String s = registerStudentBO.generateNewReservationID();
             txtRejFormNum.setText(s);
-        } catch (SQLException| ClassNotFoundException |IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -184,16 +173,23 @@ public class RegisterStudentFormController {
     public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
         new Bounce(btnRegister).play();
     }
-    public void clear(){
 
-       txtSname.clear();
-       txtAddress.clear();
-       txtContact.clear();
-       txtDob.clear();
-       txtGender.clear();
-       txtRoomType.clear();
-       txtKeyMoney.clear();
-       txtQty.clear();
+    public void clear() {
+        
+        txtSname.clear();
+        txtAddress.clear();
+        txtContact.clear();
+        txtDob.clear();
+        txtGender.clear();
+        txtRoomType.clear();
+        txtKeyMoney.clear();
+        txtQty.clear();
+        cmb_StudentID.setValue(null);
+        cmbRoomID.setValue(null);
+        roomAvailableStatus.setText("");
     }
 
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clear();
+    }
 }

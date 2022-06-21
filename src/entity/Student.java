@@ -28,6 +28,7 @@ public class Student {
     private String contact_no;
     private String date;
     private String gender;
+
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
     private List<RoomReservation> reservations ;
 

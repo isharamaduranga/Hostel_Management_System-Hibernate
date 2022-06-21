@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +15,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormController">
    <children>
-      <BorderPane layoutX="477.0" layoutY="262.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="FullBoardContext" layoutX="477.0" layoutY="262.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="37.0" prefWidth="1300.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
                <children>
@@ -104,7 +105,7 @@
                         </JFXButton>
                      </children>
                   </VBox>
-                  <ImageView fitHeight="57.0" fitWidth="68.0" layoutX="89.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="57.0" fitWidth="68.0" layoutX="89.0" layoutY="14.0" onMouseClicked="#btnUserDetailsMouseClickOnaction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/cashier.png" />
                      </image>
@@ -123,7 +124,7 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane fx:id="dashBoardContext" prefHeight="782.0" prefWidth="1062.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="dashBoardContext" onMouseClicked="#uiCloseOnAction" prefHeight="782.0" prefWidth="1062.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="756.0" fitWidth="1063.0" layoutX="129.0" layoutY="126.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
@@ -150,5 +151,19 @@
             </AnchorPane>
          </center>
       </BorderPane>
+      <Pane fx:id="UserPane" layoutY="176.0" prefHeight="354.0" prefWidth="376.0" style="-fx-background-color: white;">
+         <children>
+            <JFXTextField layoutX="142.0" layoutY="110.0" prefHeight="31.0" prefWidth="193.0" />
+            <JFXTextField layoutX="138.0" layoutY="189.0" prefHeight="31.0" prefWidth="202.0" />
+            <Label layoutX="12.0" layoutY="126.0" prefHeight="21.0" prefWidth="122.0" text="U S E R  N A M E" />
+            <Label layoutX="12.0" layoutY="202.0" prefHeight="21.0" prefWidth="122.0" text="P A S S W O R D" />
+            <Label alignment="BASELINE_CENTER" layoutX="83.0" layoutY="38.0" prefHeight="25.0" prefWidth="184.0" text="USER DETAILS" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="106.0" layoutY="300.0" onAction="#btnChangeUserDetails" prefHeight="32.0" prefWidth="164.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="Change" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
