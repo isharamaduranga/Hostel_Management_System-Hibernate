@@ -22,8 +22,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+import util.FactoryConfiguration;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class RegisterStudentFormController {
@@ -48,6 +54,7 @@ public class RegisterStudentFormController {
             loadStudentIds();
             loadRoomIds();
             generateNewReservationID();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,6 +71,8 @@ public class RegisterStudentFormController {
         cmbRoomID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 setRoomDataToFields(newValue);
+                availableRoomCheckingLogic(newValue);
+                count(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -71,6 +80,38 @@ public class RegisterStudentFormController {
 
     }
 
+
+    private void count(String rid) throws IOException {
+       /* String temp;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery sqlQuery = session.createSQLQuery("select count(room_id) from roomreservation where room_id = :room_type");
+        sqlQuery.setParameter("room_type",rid);
+        temp = String.valueOf(sqlQuery.uniqueResult());
+        transaction.commit();*/
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        try {
+            String RoomTypeCount = registerStudentBO.generateRoomAvailableStatus(rid);
+            int count= Integer.parseInt(RoomTypeCount);
+            if (count>=roomCount){
+                roomAvailableStatus.setText("NOT AVAILABLE");
+            }else{
+                roomAvailableStatus.setText("AVAILABLE");
+            }
+
+        } catch (SQLException |ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void availableRoomCheckingLogic(String newValue) throws IOException {
+
+
+    }
+
+    int roomCount;
     private void setRoomDataToFields(String id) throws Exception {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         Room room = registerStudentBO.getRoom(id);
@@ -78,7 +119,11 @@ public class RegisterStudentFormController {
         txtKeyMoney.setText(String.valueOf(room.getKey_money()));
         txtQty.setText(String.valueOf(room.getQty()));
 
+        /**Find RoomQty  According to various room Types*/
+        roomCount= Integer.parseInt(txtQty.getText());
+
     }
+
 
     private void setStudentDataToFields(String id) throws Exception {
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();

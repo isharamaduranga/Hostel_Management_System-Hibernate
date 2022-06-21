@@ -17,4 +17,5 @@ public interface RegisterStudentBO {
      Room getRoom(String id) throws Exception ;
      String generateNewReservationID() throws SQLException, ClassNotFoundException, IOException;
      boolean addReservation(RoomReservationDTO reservationDTO) throws Exception ;
+     String generateRoomAvailableStatus(String id)throws SQLException, ClassNotFoundException, IOException;
 }

@@ -37,6 +37,18 @@ public class RoomReservationDAOImpl implements RoomReservationDAO {
     }
 
     @Override
+    public String generateRoomAvailableStatus(String id) throws SQLException, ClassNotFoundException, IOException {
+        String temp;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery sqlQuery = session.createSQLQuery("select count(room_id) from roomreservation where room_id = :room_type");
+        sqlQuery.setParameter("room_type",id);
+        temp = String.valueOf(sqlQuery.uniqueResult());
+        transaction.commit();
+        return temp;
+    }
+
+    @Override
     public boolean add(RoomReservation entity) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();

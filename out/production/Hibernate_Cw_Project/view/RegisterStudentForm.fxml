@@ -86,7 +86,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="709.0" layoutY="444.0" prefHeight="61.0" prefWidth="219.0" text="AVAILABLE" textAlignment="CENTER" textFill="#00bf30">
+      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="709.0" layoutY="444.0" prefHeight="61.0" prefWidth="219.0" textAlignment="CENTER" textFill="#00bf30">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

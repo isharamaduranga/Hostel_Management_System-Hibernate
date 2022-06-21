@@ -68,4 +68,10 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
                 reservationDTO.getStatus()
                 ));
     }
+
+    @Override
+    public String generateRoomAvailableStatus(String id) throws SQLException, ClassNotFoundException, IOException {
+        RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
+       return roomReservationDAO.generateRoomAvailableStatus(id);
+    }
 }
