@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -86,9 +87,9 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="709.0" layoutY="444.0" prefHeight="61.0" prefWidth="219.0" textAlignment="CENTER" textFill="#00bf30">
+      <Label fx:id="roomAvailableStatus" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="702.0" layoutY="444.0" prefHeight="61.0" prefWidth="295.0" style="-fx-border-color: PURPLE; -fx-border-radius: 2.0EM; -fx-border-width: 2;" textAlignment="CENTER" textFill="#00bf30">
          <font>
-            <Font name="System Bold" size="21.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
       <JFXTextField fx:id="txtDob" labelFloat="true" layoutX="87.0" layoutY="540.0" prefHeight="31.0" prefWidth="211.0" promptText="DATE OF BIRTH" unFocusColor="#6944ee">
@@ -108,5 +109,6 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <Separator layoutX="669.0" layoutY="406.0" prefHeight="5.0" prefWidth="368.0" />
    </children>
 </AnchorPane>

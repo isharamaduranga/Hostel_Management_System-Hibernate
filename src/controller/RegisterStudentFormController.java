@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -90,10 +91,13 @@ public class RegisterStudentFormController {
             int count = Integer.parseInt(RoomTypeCount);
 
             if (count >= roomCount) {
+                roomAvailableStatus.setTextFill(Paint.valueOf("RED"));
                 roomAvailableStatus.setText("NOT AVAILABLE");
                 new Alert(Alert.AlertType.WARNING, "That " + rid + " Room is Out Of Quantity..!!!").showAndWait();
                 btnRegister.setDisable(true);
+
             } else {
+                roomAvailableStatus.setTextFill(Paint.valueOf("GREEN"));
                 roomAvailableStatus.setText("AVAILABLE");
                 btnRegister.setDisable(false);
             }
