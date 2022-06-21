@@ -28,6 +28,7 @@ public class RoomReservation implements SuperEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id",referencedColumnName = "room_id")
     private Room room;
+
     private String status;
 
 
