@@ -12,6 +12,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -30,6 +31,7 @@ public class RoomReservation implements SuperEntity {
     private Room room;
 
     private String status;
+
 
 
 }

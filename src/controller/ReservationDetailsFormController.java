@@ -11,28 +11,70 @@ package controller;
 import bo.custom.impl.ReservationDetailsBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import entity.CustomEntity;
 import entity.Room;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import view.tm.reservationDetailsTM;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Observable;
 
 public class ReservationDetailsFormController {
     public TableView tblRoomReservation;
     public TableColumn colStudentID;
     public TableColumn colStudentName;
-    public TableColumn colRejisterDate;
-    public TableColumn colKeyMoney;
+    public TableColumn colDateOfRegister;
+
 
     public JFXComboBox<String> cmbRoomId;
     public JFXTextField txtRoomType;
     public JFXTextField txtMonthRent;
     public JFXTextField txtQty;
 
+
     public void initialize(){
         loadRoomIds();
 
+        cmbRoomId.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue!=null){
+
+                setRoomData(newValue);
+                try {
+
+                    setProgrammeDetailsToTable (newValue);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        colStudentID.setCellValueFactory(new PropertyValueFactory<>("student_id"));
+        colStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDateOfRegister.setCellValueFactory(new PropertyValueFactory<>("reservationDate"));
+
+
+    }
+
+    private void setProgrammeDetailsToTable(String roomId) throws Exception {
+        ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
+        ObservableList<CustomEntity> tmList= FXCollections.observableArrayList();
+        List<CustomEntity> customEntities = reservationDetailsBO.loadAllStudentDetails(roomId);
+        for (CustomEntity customEntity : customEntities) {
+            reservationDetailsTM reservationDetailsTM = new reservationDetailsTM(
+                    customEntity.getStudent_id(),
+                    customEntity.getName(),
+                    customEntity.getReservationDate()
+            );
+            tmList.add(customEntity);
+            tblRoomReservation.setItems(tmList);
+        }
+        System.out.println(tmList);
     }
 
     private void loadRoomIds() {
@@ -42,14 +84,6 @@ public class ReservationDetailsFormController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        cmbRoomId.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue!=null){
-
-                setRoomData(newValue);
-
-            }
-        });
 
     }
 

@@ -30,4 +30,10 @@ public class CustomEntity {
     private String res_id;
     private LocalDate reservationDate;
     private String status;
+
+    public CustomEntity(String student_id, String name, LocalDate reservationDate) {
+        this.student_id = student_id;
+        this.name = name;
+        this.reservationDate = reservationDate;
+    }
 }

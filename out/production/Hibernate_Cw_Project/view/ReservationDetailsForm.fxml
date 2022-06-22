@@ -22,23 +22,22 @@
       </Pane>
       <TableView fx:id="tblRoomReservation" layoutX="55.0" layoutY="332.0" prefHeight="363.0" prefWidth="955.0" stylesheets="@css/color.css">
          <columns>
-            <TableColumn fx:id="colStudentID" prefWidth="209.0" text="STUDENT ID" />
-            <TableColumn fx:id="colStudentName" prefWidth="278.0" text="STUDENT NAME" />
-            <TableColumn fx:id="colRejisterDate" prefWidth="212.0" text="REGISTER DATE" />
-            <TableColumn fx:id="colKeyMoney" prefWidth="255.0" text="KEY MONEY" />
+            <TableColumn fx:id="colStudentID" prefWidth="260.0" text="STUDENT ID" />
+            <TableColumn fx:id="colStudentName" prefWidth="367.0" text="STUDENT NAME" />
+            <TableColumn fx:id="colDateOfRegister" maxWidth="326.0" prefWidth="327.0" text="REGISTER DATE" />
          </columns>
       </TableView>
-      <JFXTextField fx:id="txtRoomType" labelFloat="true" layoutX="135.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE">
+      <JFXTextField fx:id="txtRoomType" labelFloat="true" layoutX="55.0" layoutY="214.0" prefHeight="39.0" prefWidth="230.0" promptText="ROOM TYPE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="420.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="KEY MONEY">
+      <JFXTextField fx:id="txtMonthRent" labelFloat="true" layoutX="426.0" layoutY="214.0" prefHeight="39.0" prefWidth="230.0" promptText="KEY MONEY">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="706.0" layoutY="205.0" prefHeight="39.0" prefWidth="230.0" promptText="QTY">
+      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="780.0" layoutY="214.0" prefHeight="39.0" prefWidth="230.0" promptText="QTY">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
