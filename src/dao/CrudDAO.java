@@ -2,7 +2,7 @@ package dao;
 
 import java.util.List;
 
-public interface CrudDAO<Entity, ID> {
+public interface CrudDAO<Entity, ID> extends SuperDAO{
     boolean add(Entity entity) throws Exception;
 
     boolean update(Entity entity) throws Exception;
