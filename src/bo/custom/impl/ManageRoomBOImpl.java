@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageRoomBOImpl implements ManageRoomBO {
+    RoomDAO roomDAO = new RoomDAOImpl();
 
     @Override
     public boolean add(RoomDTO roomDTO) throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
+
        return roomDAO.add(new Room(
                roomDTO.getRoom_id(),
                roomDTO.getType(),
@@ -32,7 +33,6 @@ public class ManageRoomBOImpl implements ManageRoomBO {
 
     @Override
     public List<RoomDTO> loadAllStudent() throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
         List<Room> all = roomDAO.findAll();
         ArrayList<RoomDTO>roomsDto= new ArrayList<>();
 
@@ -48,7 +48,6 @@ public class ManageRoomBOImpl implements ManageRoomBO {
 
     @Override
     public boolean updateRoom(RoomDTO roomDTO) throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
        return roomDAO.update(new Room(
                 roomDTO.getRoom_id(),
                 roomDTO.getType(),
@@ -59,7 +58,6 @@ public class ManageRoomBOImpl implements ManageRoomBO {
 
     @Override
     public boolean deleteRoom(String id) throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
         return roomDAO.delete(id);
     }
 

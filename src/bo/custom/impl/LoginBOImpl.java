@@ -18,22 +18,20 @@ import entity.User;
 import java.util.List;
 
 public class LoginBOImpl implements LoginBO {
+    UserDAO userDAO = new UserDAOImpl();
 
     @Override
     public User getUserData(String id) throws Exception {
-        UserDAO userDAO = new UserDAOImpl();
         return  userDAO.find(id);
     }
 
     @Override
     public List<User> loadAllUser() throws Exception {
-        UserDAO userDAO = new UserDAOImpl();
        return userDAO.findAll();
     }
 
     @Override
     public boolean updateUser(UserDTO userDTO) throws Exception {
-        UserDAO userDAO = new UserDAOImpl();
       return userDAO.update(new User(
                  userDTO.getId(),
                 userDTO.getUserName(),

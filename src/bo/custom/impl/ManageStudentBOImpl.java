@@ -18,17 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageStudentBOImpl implements ManageStudentBO {
+     StudentDAO studentDAO = new StudentDAOImpl();
 
     @Override
     public boolean add(StudentDTO studentDTO) throws Exception {
-        StudentDAO studentDAO = new StudentDAOImpl();
+
         return studentDAO.add(new Student(studentDTO.getStudent_id(), studentDTO.getName(), studentDTO.getAddress(),
                 studentDTO.getContact_no(), studentDTO.getDate(), studentDTO.getGender()));
     }
 
     @Override
     public List<StudentDTO> loadAllStudent() throws Exception {
-        StudentDAO studentDAO = new StudentDAOImpl();
         List<Student> all = studentDAO.findAll();
         ArrayList<StudentDTO> dtoArrayList = new ArrayList<>();
 
@@ -45,7 +45,6 @@ public class ManageStudentBOImpl implements ManageStudentBO {
 
     @Override
     public boolean updateStudent(StudentDTO studentDto) throws Exception {
-        StudentDAO studentDAO = new StudentDAOImpl();
       return  studentDAO.update(new Student(
                 studentDto.getStudent_id(),
                 studentDto.getName(),
@@ -58,7 +57,6 @@ public class ManageStudentBOImpl implements ManageStudentBO {
 
     @Override
     public boolean deleteStudent(String id) throws Exception {
-        StudentDAO studentDAO = new StudentDAOImpl();
         return studentDAO.delete(id);
     }
 }

@@ -26,52 +26,52 @@ import java.util.List;
 
 public class RegisterStudentBOImpl implements RegisterStudentBO {
 
+    StudentDAO studentDAO = new StudentDAOImpl();
+    RoomDAO roomDAO = new RoomDAOImpl();
+    RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
+
     @Override
     public List getStudentIds() throws IOException {
-        StudentDAO studentDAO = new StudentDAOImpl();
+
         return studentDAO.getStudentIds();
 
     }
 
     @Override
     public List getRoomIds() throws IOException {
-        RoomDAO roomDAO = new RoomDAOImpl();
+
         return roomDAO.getRoomIds();
     }
 
     @Override
     public Student getStudent(String id) throws Exception {
-        StudentDAO studentDAO = new StudentDAOImpl();
         return studentDAO.find(id);
     }
 
     @Override
     public Room getRoom(String id) throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
         return roomDAO.find(id);
     }
 
     @Override
     public String generateNewReservationID() throws SQLException, ClassNotFoundException, IOException {
-        RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
+
         return roomReservationDAO.generateNewId();
     }
 
     @Override
     public boolean addReservation(RoomReservationDTO reservationDTO) throws Exception {
-        RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
         return roomReservationDAO.add(new RoomReservation(
                 reservationDTO.getRes_id(),
                 reservationDTO.getDate(),
-               new Student(reservationDTO.getStudent_id()) ,
-               new Room(reservationDTO.getRoom_id()),
+                new Student(reservationDTO.getStudent_id()),
+                new Room(reservationDTO.getRoom_id()),
                 reservationDTO.getStatus()
-                ));
+        ));
     }
 
     @Override
     public String generateRoomAvailableStatus(String id) throws SQLException, ClassNotFoundException, IOException {
-        RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
-       return roomReservationDAO.generateRoomAvailableStatus(id);
+        return roomReservationDAO.generateRoomAvailableStatus(id);
     }
 }

@@ -21,27 +21,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDetailsBOImpl implements ReservationDetailsBO {
+
+    RoomDAO roomDAO = new RoomDAOImpl();
+    QueryDAO queryDAO = new QueryDAOImpl();
+
     @Override
     public List getRoomIds() throws IOException {
-        RoomDAO roomDAO = new RoomDAOImpl();
         return roomDAO.getRoomIds();
     }
+
     @Override
-    public Room getRoomData(String id)throws Exception {
-        RoomDAO roomDAO = new RoomDAOImpl();
-        return   roomDAO.find(id);
+    public Room getRoomData(String id) throws Exception {
+
+        return roomDAO.find(id);
     }
 
     @Override
     public List<CustomEntity> loadAllStudentDetails(String id) throws Exception {
-        QueryDAO queryDAO = new QueryDAOImpl();
+
         List<CustomEntity> studentDetails = queryDAO.getStudentDetails(id);
 
-        ArrayList<CustomEntity> entityArrayList= new ArrayList<>();
+        ArrayList<CustomEntity> entityArrayList = new ArrayList<>();
 
         for (CustomEntity studentDetail : studentDetails) {
             entityArrayList.add(studentDetail);
         }
-       return  entityArrayList;
+        return entityArrayList;
     }
 }

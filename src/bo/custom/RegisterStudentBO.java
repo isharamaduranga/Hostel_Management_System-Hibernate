@@ -1,5 +1,6 @@
 package bo.custom;
 
+import bo.SuperBO;
 import dao.custom.RoomDAO;
 import dao.custom.impl.RoomDAOImpl;
 import dto.RoomReservationDTO;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface RegisterStudentBO {
+public interface RegisterStudentBO extends SuperBO {
      List getStudentIds() throws IOException;
      List getRoomIds() throws IOException;
      Student getStudent(String id) throws Exception;
