@@ -9,6 +9,7 @@
 package controller;
 
 import animatefx.animation.Bounce;
+import bo.BOFactory;
 import bo.custom.RegisterStudentBO;
 import bo.custom.impl.RegisterStudentBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -49,7 +50,7 @@ public class RegisterStudentFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+       private final RegisterStudentBO registerStudentBO = (RegisterStudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER_STUDENT);
 
 
 

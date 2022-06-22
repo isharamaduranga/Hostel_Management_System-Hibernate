@@ -8,8 +8,8 @@
 
 package controller;
 
+import bo.BOFactory;
 import bo.custom.LoginBO;
-import bo.custom.impl.LoginBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dto.UserDTO;
@@ -58,7 +58,7 @@ public class DashBoardFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    LoginBO loginBO = new LoginBOImpl();
+    private final LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN_USER);
 
     public void initialize() {
         UserPane.setVisible(false);

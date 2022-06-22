@@ -10,6 +10,7 @@ package controller;
 
 import animatefx.animation.Pulse;
 import animatefx.animation.ZoomIn;
+import bo.BOFactory;
 import bo.custom.impl.ManageStudentBOImpl;
 import bo.custom.ManageStudentBO;
 import com.jfoenix.controls.JFXButton;
@@ -65,7 +66,7 @@ public class ManageStudentFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
+    private final ManageStudentBO manageStudentBO = (ManageStudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MANAGE_STUDENT);
 
 
 

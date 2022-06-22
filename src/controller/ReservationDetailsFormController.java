@@ -8,6 +8,8 @@
 
 package controller;
 
+import bo.BOFactory;
+import bo.custom.ReservationDetailsBO;
 import bo.custom.impl.ReservationDetailsBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -39,7 +41,7 @@ public class ReservationDetailsFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
+   private final ReservationDetailsBO reservationDetailsBO = (ReservationDetailsBOImpl) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION_DETAILS);
 
 
     public void initialize(){

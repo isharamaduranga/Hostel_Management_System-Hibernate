@@ -8,8 +8,8 @@
 
 package controller;
 
+import bo.BOFactory;
 import bo.custom.LoginBO;
-import bo.custom.impl.LoginBOImpl;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import entity.User;
@@ -26,30 +26,26 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class LoginFormController {
-    public JFXTextField txtUserName;
-    public JFXPasswordField pwdPassword;
-    public AnchorPane loginFormContext;
-
-    public ImageView dontShowIcon;
-    public ImageView showPasswordIcon;
-    public JFXTextField txtShowPassword;
-
-    int attemptsLogin = 0;
-
     /**
      * Apply Dependency Injection (Property)
      */
-    LoginBO loginBO = new LoginBOImpl();
+    private final LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN_USER);
 
+
+    public JFXTextField txtUserName;
+    public JFXPasswordField pwdPassword;
+    public AnchorPane loginFormContext;
+    public ImageView dontShowIcon;
+    public ImageView showPasswordIcon;
+    public JFXTextField txtShowPassword;
+    int attemptsLogin = 0;
 
     public void LogInOnAction(ActionEvent actionEvent) throws Exception {
         attemptsLogin++;
         if (attemptsLogin < 5) {  // attempts calculate
-
 
 
             User userData = loginBO.getUserData("UID-001");
@@ -78,7 +74,7 @@ public class LoginFormController {
                     stage1.show();
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 String tilte = "Sign In ";
                 String message = "Something Went Wrong  Check fields";
                 TrayNotification tray = new TrayNotification();

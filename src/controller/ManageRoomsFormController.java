@@ -10,6 +10,7 @@ package controller;
 
 import animatefx.animation.Pulse;
 import animatefx.animation.ZoomIn;
+import bo.BOFactory;
 import bo.custom.ManageRoomBO;
 import bo.custom.impl.ManageRoomBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -54,7 +55,7 @@ public class ManageRoomsFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
+    private final ManageRoomBO manageRoomBO = (ManageRoomBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MANAGE_ROOM);
 
 
     /** Define Linked-HashMap for the validation  */
