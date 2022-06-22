@@ -4,7 +4,7 @@ import dto.StudentDTO;
 
 import java.util.List;
 
-public interface ManageStudentBo {
+public interface ManageStudentBO {
     boolean add(StudentDTO studentDTO) throws Exception;
     List<StudentDTO> loadAllStudent() throws Exception;
     boolean updateStudent(StudentDTO studentDto) throws Exception;

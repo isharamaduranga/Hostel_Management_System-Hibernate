@@ -11,7 +11,7 @@ package controller;
 import animatefx.animation.Pulse;
 import animatefx.animation.ZoomIn;
 import bo.custom.impl.ManageStudentBOImpl;
-import bo.custom.ManageStudentBo;
+import bo.custom.ManageStudentBO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -120,7 +120,7 @@ public class ManageStudentFormController {
     }
 
     private void setStudentData() throws Exception {
-        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
         ObservableList<StudentDTO>tmList= FXCollections.observableArrayList();
         List<StudentDTO> studentDTOS = manageStudentBO.loadAllStudent();
 
@@ -165,7 +165,7 @@ public class ManageStudentFormController {
 
     public void AddStudentOnAction(ActionEvent actionEvent) throws Exception {
         try {
-            ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+            ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
 
             if (manageStudentBO.add(new StudentDTO(txtSRejNumber.getText(),
                     txtStudentName.getText(),
@@ -183,7 +183,7 @@ public class ManageStudentFormController {
     }
 
     public void DeleteStudentOnAction(ActionEvent actionEvent) throws Exception {
-        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
         try {
             if (manageStudentBO.deleteStudent(txtSRejNumber.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Delete this record?").showAndWait();
@@ -198,7 +198,7 @@ public class ManageStudentFormController {
     }
 
     public void UpdateStudentOnAction(ActionEvent actionEvent) throws Exception {
-        ManageStudentBo manageStudentBO = new ManageStudentBOImpl();
+        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
         try {
             if (manageStudentBO.updateStudent(new StudentDTO(
                     txtSRejNumber.getText(),

@@ -8,7 +8,7 @@
 
 package bo.custom.impl;
 
-import bo.custom.ManageStudentBo;
+import bo.custom.ManageStudentBO;
 import dao.custom.StudentDAO;
 import dao.custom.impl.StudentDAOImpl;
 import dto.StudentDTO;
@@ -17,7 +17,7 @@ import entity.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageStudentBOImpl implements ManageStudentBo {
+public class ManageStudentBOImpl implements ManageStudentBO {
 
     @Override
     public boolean add(StudentDTO studentDTO) throws Exception {

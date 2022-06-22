@@ -11,6 +11,7 @@ package util;
 import entity.Room;
 import entity.RoomReservation;
 import entity.Student;
+import entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -31,6 +32,7 @@ public class FactoryConfiguration {
         configuration.setProperties(p);
 
         //configuring entities
+        configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Student.class);
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(RoomReservation.class);

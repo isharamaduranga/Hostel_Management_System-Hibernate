@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormController">
    <children>
@@ -151,18 +153,48 @@
             </AnchorPane>
          </center>
       </BorderPane>
-      <Pane fx:id="UserPane" layoutY="176.0" prefHeight="354.0" prefWidth="376.0" style="-fx-background-color: white;">
+      <Pane fx:id="UserPane" layoutX="464.0" layoutY="176.0" opacity="0.86" prefHeight="458.0" prefWidth="489.0" style="-fx-background-color: white;">
          <children>
-            <JFXTextField layoutX="142.0" layoutY="110.0" prefHeight="31.0" prefWidth="193.0" />
-            <JFXTextField layoutX="138.0" layoutY="189.0" prefHeight="31.0" prefWidth="202.0" />
-            <Label layoutX="12.0" layoutY="126.0" prefHeight="21.0" prefWidth="122.0" text="U S E R  N A M E" />
-            <Label layoutX="12.0" layoutY="202.0" prefHeight="21.0" prefWidth="122.0" text="P A S S W O R D" />
-            <Label alignment="BASELINE_CENTER" layoutX="83.0" layoutY="38.0" prefHeight="25.0" prefWidth="184.0" text="USER DETAILS" textAlignment="CENTER">
+            <JFXTextField fx:id="txtUserName" editable="false" layoutX="148.0" layoutY="110.0" prefHeight="31.0" prefWidth="306.0" />
+            <JFXTextField fx:id="txtPassword" editable="false" layoutX="144.0" layoutY="203.0" prefHeight="31.0" prefWidth="306.0" />
+            <Label layoutX="38.0" layoutY="126.0" prefHeight="21.0" prefWidth="122.0" text="USER  NAME">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="38.0" layoutY="217.0" prefHeight="21.0" prefWidth="122.0" text="PASSWORD">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label alignment="BASELINE_CENTER" layoutX="143.0" layoutY="9.0" prefHeight="25.0" prefWidth="184.0" text="USER DETAILS" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <JFXButton layoutX="106.0" layoutY="300.0" onAction="#btnChangeUserDetails" prefHeight="32.0" prefWidth="164.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="Change" />
+            <JFXButton layoutX="78.0" layoutY="362.0" onAction="#userRequestYES" prefHeight="32.0" prefWidth="134.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="YES" />
+            <Separator layoutX="28.0" layoutY="301.0" prefHeight="3.0" prefWidth="447.0" />
+            <Text fill="RED" layoutX="43.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do You Need to Change Your User Name OR Password">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="hintNewUserName" fill="#05ae2a" layoutX="35.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P l e a s e   E n t e r   Y o u r   N e w   U s e r  N a m e" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Separator layoutX="24.0" layoutY="41.0" prefHeight="3.0" prefWidth="447.0" />
+            <JFXButton fx:id="hintBtnUpdate" layoutX="153.0" layoutY="255.0" onAction="#btnUpdateData" prefHeight="32.0" prefWidth="164.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="U P D A T E" textFill="WHITE" visible="false" />
+            <Text fx:id="hintNewPassword" fill="#05ae2a" layoutX="36.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P l e a s e   E n t e r   Y o u r   N e w   P a s s w o r d" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="260.0" layoutY="362.0" onAction="#userRequestNO" prefHeight="32.0" prefWidth="134.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="NO" />
+            <TextField fx:id="txtUserId" alignment="BASELINE_CENTER" layoutX="162.0" layoutY="54.0" prefHeight="21.0" prefWidth="152.0" text="UID-001">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TextField>
          </children>
       </Pane>
    </children>

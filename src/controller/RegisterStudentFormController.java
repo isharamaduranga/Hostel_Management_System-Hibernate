@@ -83,6 +83,17 @@ public class RegisterStudentFormController {
 
     }
 
+    private void setRoomDataToFields(String id) throws Exception {
+        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+        Room room = registerStudentBO.getRoom(id);
+        txtRoomType.setText(room.getType());
+        txtKeyMoney.setText(String.valueOf(room.getKey_money()));
+        txtQty.setText(String.valueOf(room.getQty()));
+
+        /**Find RoomQty  According to various room Types*/
+        roomCount = Integer.parseInt(txtQty.getText());
+
+    }
     private void availableRoomCheckingLogic(String rid) throws IOException {
 
         RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
@@ -107,17 +118,7 @@ public class RegisterStudentFormController {
         }
     }
 
-    private void setRoomDataToFields(String id) throws Exception {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
-        Room room = registerStudentBO.getRoom(id);
-        txtRoomType.setText(room.getType());
-        txtKeyMoney.setText(String.valueOf(room.getKey_money()));
-        txtQty.setText(String.valueOf(room.getQty()));
 
-        /**Find RoomQty  According to various room Types*/
-        roomCount = Integer.parseInt(txtQty.getText());
-
-    }
 
 
     private void setStudentDataToFields(String id) throws Exception {
