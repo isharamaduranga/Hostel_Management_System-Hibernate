@@ -9,10 +9,9 @@
 package bo.custom.impl;
 
 import bo.custom.ReservationDetailsBO;
+import dao.DAOFactory;
 import dao.custom.QueryDAO;
 import dao.custom.RoomDAO;
-import dao.custom.impl.QueryDAOImpl;
-import dao.custom.impl.RoomDAOImpl;
 import entity.CustomEntity;
 import entity.Room;
 
@@ -21,9 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDetailsBOImpl implements ReservationDetailsBO {
-
-    RoomDAO roomDAO = new RoomDAOImpl();
-    QueryDAO queryDAO = new QueryDAOImpl();
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
+    private final QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERY_DAO);
 
     @Override
     public List getRoomIds() throws IOException {
@@ -38,6 +39,7 @@ public class ReservationDetailsBOImpl implements ReservationDetailsBO {
 
     @Override
     public List<CustomEntity> loadAllStudentDetails(String id) throws Exception {
+
 
         List<CustomEntity> studentDetails = queryDAO.getStudentDetails(id);
 

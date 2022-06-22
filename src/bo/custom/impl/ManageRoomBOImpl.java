@@ -9,8 +9,8 @@
 package bo.custom.impl;
 
 import bo.custom.ManageRoomBO;
+import dao.DAOFactory;
 import dao.custom.RoomDAO;
-import dao.custom.impl.RoomDAOImpl;
 import dto.RoomDTO;
 import entity.Room;
 
@@ -18,42 +18,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageRoomBOImpl implements ManageRoomBO {
-    RoomDAO roomDAO = new RoomDAOImpl();
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
 
     @Override
     public boolean add(RoomDTO roomDTO) throws Exception {
 
-       return roomDAO.add(new Room(
-               roomDTO.getRoom_id(),
-               roomDTO.getType(),
-               roomDTO.getKey_money(),
-               roomDTO.getQty()
+        return roomDAO.add(new Room(
+                roomDTO.getRoom_id(),
+                roomDTO.getType(),
+                roomDTO.getKey_money(),
+                roomDTO.getQty()
         ));
     }
 
     @Override
     public List<RoomDTO> loadAllStudent() throws Exception {
         List<Room> all = roomDAO.findAll();
-        ArrayList<RoomDTO>roomsDto= new ArrayList<>();
+        ArrayList<RoomDTO> roomsDto = new ArrayList<>();
 
         for (Room room : all) {
             roomsDto.add(new RoomDTO(room.getRoom_id(),
                     room.getType(),
                     room.getKey_money(),
                     room.getQty()
-                    ));
+            ));
         }
         return roomsDto;
     }
 
     @Override
     public boolean updateRoom(RoomDTO roomDTO) throws Exception {
-       return roomDAO.update(new Room(
+        return roomDAO.update(new Room(
                 roomDTO.getRoom_id(),
                 roomDTO.getType(),
                 roomDTO.getKey_money(),
                 roomDTO.getQty()
-                ));
+        ));
     }
 
     @Override

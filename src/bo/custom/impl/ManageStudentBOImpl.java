@@ -9,8 +9,8 @@
 package bo.custom.impl;
 
 import bo.custom.ManageStudentBO;
+import dao.DAOFactory;
 import dao.custom.StudentDAO;
-import dao.custom.impl.StudentDAOImpl;
 import dto.StudentDTO;
 import entity.Student;
 
@@ -18,7 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageStudentBOImpl implements ManageStudentBO {
-     StudentDAO studentDAO = new StudentDAOImpl();
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private final StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
 
     @Override
     public boolean add(StudentDTO studentDTO) throws Exception {
@@ -45,14 +48,14 @@ public class ManageStudentBOImpl implements ManageStudentBO {
 
     @Override
     public boolean updateStudent(StudentDTO studentDto) throws Exception {
-      return  studentDAO.update(new Student(
+        return studentDAO.update(new Student(
                 studentDto.getStudent_id(),
                 studentDto.getName(),
                 studentDto.getAddress(),
                 studentDto.getContact_no(),
                 studentDto.getDate(),
                 studentDto.getGender()
-                ));
+        ));
     }
 
     @Override

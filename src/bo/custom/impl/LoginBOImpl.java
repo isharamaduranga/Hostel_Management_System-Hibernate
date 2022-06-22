@@ -9,31 +9,33 @@
 package bo.custom.impl;
 
 import bo.custom.LoginBO;
+import dao.DAOFactory;
 import dao.custom.UserDAO;
-import dao.custom.impl.UserDAOImpl;
-import dto.StudentDTO;
 import dto.UserDTO;
 import entity.User;
 
 import java.util.List;
 
 public class LoginBOImpl implements LoginBO {
-    UserDAO userDAO = new UserDAOImpl();
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private final UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
     @Override
     public User getUserData(String id) throws Exception {
-        return  userDAO.find(id);
+        return userDAO.find(id);
     }
 
     @Override
     public List<User> loadAllUser() throws Exception {
-       return userDAO.findAll();
+        return userDAO.findAll();
     }
 
     @Override
     public boolean updateUser(UserDTO userDTO) throws Exception {
-      return userDAO.update(new User(
-                 userDTO.getId(),
+        return userDAO.update(new User(
+                userDTO.getId(),
                 userDTO.getUserName(),
                 userDTO.getPassword()
         ));

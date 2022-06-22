@@ -9,12 +9,10 @@
 package bo.custom.impl;
 
 import bo.custom.RegisterStudentBO;
+import dao.DAOFactory;
 import dao.custom.RoomDAO;
 import dao.custom.RoomReservationDAO;
 import dao.custom.StudentDAO;
-import dao.custom.impl.RoomDAOImpl;
-import dao.custom.impl.RoomReservationDAOImpl;
-import dao.custom.impl.StudentDAOImpl;
 import dto.RoomReservationDTO;
 import entity.Room;
 import entity.RoomReservation;
@@ -25,10 +23,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RegisterStudentBOImpl implements RegisterStudentBO {
-
-    StudentDAO studentDAO = new StudentDAOImpl();
-    RoomDAO roomDAO = new RoomDAOImpl();
-    RoomReservationDAO roomReservationDAO = new RoomReservationDAOImpl();
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private final StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
+    private final RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM);
+    private final RoomReservationDAO roomReservationDAO = (RoomReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ROOM_RESERVATION);
 
     @Override
     public List getStudentIds() throws IOException {
