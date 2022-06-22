@@ -36,6 +36,11 @@ public class ReservationDetailsFormController {
     public JFXTextField txtMonthRent;
     public JFXTextField txtQty;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
+
 
     public void initialize(){
         loadRoomIds();
@@ -62,7 +67,7 @@ public class ReservationDetailsFormController {
     }
 
     private void setProgrammeDetailsToTable(String roomId) throws Exception {
-        ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
+
         ObservableList<CustomEntity> tmList= FXCollections.observableArrayList();
         List<CustomEntity> customEntities = reservationDetailsBO.loadAllStudentDetails(roomId);
         for (CustomEntity customEntity : customEntities) {
@@ -78,7 +83,6 @@ public class ReservationDetailsFormController {
     }
 
     private void loadRoomIds() {
-        ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
         try {
             cmbRoomId.getItems().addAll(reservationDetailsBO.getRoomIds());
         } catch (IOException e) {
@@ -88,7 +92,6 @@ public class ReservationDetailsFormController {
     }
 
     private void setRoomData(String rid) {
-        ReservationDetailsBOImpl reservationDetailsBO = new ReservationDetailsBOImpl();
         try {
             Room roomData = reservationDetailsBO.getRoomData(rid);
             txtRoomType.setText(roomData.getType());

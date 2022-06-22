@@ -40,12 +40,18 @@ public class LoginFormController {
 
     int attemptsLogin = 0;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    LoginBO loginBO = new LoginBOImpl();
+
+
     public void LogInOnAction(ActionEvent actionEvent) throws Exception {
         attemptsLogin++;
         if (attemptsLogin < 5) {  // attempts calculate
 
 
-            LoginBO loginBO = new LoginBOImpl();
+
             User userData = loginBO.getUserData("UID-001");
 
             try {

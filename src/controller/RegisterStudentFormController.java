@@ -46,6 +46,13 @@ public class RegisterStudentFormController {
     public JFXButton btnClear;
     int roomCount;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+
+
+
     public void initialize() {
         try {
             loadStudentIds();
@@ -84,7 +91,7 @@ public class RegisterStudentFormController {
     }
 
     private void setRoomDataToFields(String id) throws Exception {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
+
         Room room = registerStudentBO.getRoom(id);
         txtRoomType.setText(room.getType());
         txtKeyMoney.setText(String.valueOf(room.getKey_money()));
@@ -95,8 +102,6 @@ public class RegisterStudentFormController {
 
     }
     private void availableRoomCheckingLogic(String rid) throws IOException {
-
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         try {
             String RoomTypeCount = registerStudentBO.generateRoomAvailableStatus(rid);
             int count = Integer.parseInt(RoomTypeCount);
@@ -122,7 +127,6 @@ public class RegisterStudentFormController {
 
 
     private void setStudentDataToFields(String id) throws Exception {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         Student student = registerStudentBO.getStudent(id);
         txtSname.setText(student.getName());
         txtAddress.setText(student.getAddress());
@@ -132,19 +136,16 @@ public class RegisterStudentFormController {
     }
 
     private void loadRoomIds() throws IOException {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         cmbRoomID.getItems().addAll(registerStudentBO.getRoomIds());
     }
 
     private void loadStudentIds() throws IOException {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         cmb_StudentID.getItems().addAll(registerStudentBO.getStudentIds());
 
     }
 
     public void rejisterOnAction(ActionEvent actionEvent) throws Exception {
 
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         if (roomAvailableStatus.equals("NOT AVAILABLE") | cmb_StudentID.getSelectionModel().isEmpty() || cmbRoomID.getSelectionModel().isEmpty() || date.getValue() == null) {
             new Alert(Alert.AlertType.ERROR, "Something Went Wrong. Pleases try again !").showAndWait();
         } else {
@@ -166,7 +167,6 @@ public class RegisterStudentFormController {
     }
 
     public void generateNewReservationID() {
-        RegisterStudentBO registerStudentBO = new RegisterStudentBOImpl();
         try {
             String s = registerStudentBO.generateNewReservationID();
             txtRejFormNum.setText(s);

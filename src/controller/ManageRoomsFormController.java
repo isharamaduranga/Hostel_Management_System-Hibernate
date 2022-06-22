@@ -51,6 +51,10 @@ public class ManageRoomsFormController {
     public JFXTextField txtSearchRoomId;
     public JFXComboBox cmbRoomType;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
 
 
     /** Define Linked-HashMap for the validation  */
@@ -106,7 +110,7 @@ public class ManageRoomsFormController {
     }
 
     private void setRoomDataLoad() throws Exception {
-        ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
+
         List<RoomDTO> roomDTOS = manageRoomBO.loadAllStudent();
         ObservableList<RoomDTO>observableList = FXCollections.observableArrayList();
         for (RoomDTO roomDTO : roomDTOS) {
@@ -148,7 +152,6 @@ public class ManageRoomsFormController {
 
 
     public void AddRoomOnAction(ActionEvent actionEvent) throws Exception {
-        ManageRoomBO manageRoomBO = new ManageRoomBOImpl();
         try {
             if (manageRoomBO.add(new RoomDTO(txtRoomId.getText(),
                     cmbRoomType.getValue().toString(),
@@ -167,7 +170,6 @@ public class ManageRoomsFormController {
 
 
     public void DeleteRoomOnAction(ActionEvent actionEvent) throws Exception {
-        ManageRoomBOImpl manageRoomBO = new ManageRoomBOImpl();
         try {
             if (manageRoomBO.deleteRoom(txtRoomId.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Delete this record?").showAndWait();
@@ -180,7 +182,6 @@ public class ManageRoomsFormController {
     }
 
     public void UpdateRoomOnAction(ActionEvent actionEvent) throws Exception {
-        ManageRoomBOImpl manageRoomBO = new ManageRoomBOImpl();
         try {
             if (manageRoomBO.updateRoom(new RoomDTO(
                     txtRoomId.getText(),

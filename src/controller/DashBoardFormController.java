@@ -55,6 +55,10 @@ public class DashBoardFormController {
     public Text hintNewPassword;
     public TextField txtUserId;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    LoginBO loginBO = new LoginBOImpl();
 
     public void initialize() {
         UserPane.setVisible(false);
@@ -67,7 +71,6 @@ public class DashBoardFormController {
     }
 
     private void loadUserDataLogin() throws Exception {
-        LoginBO loginBO = new LoginBOImpl();
         List<User> users = loginBO.loadAllUser();
         for (User user : users) {
             txtUserName.setText(user.getUserName());
@@ -151,7 +154,6 @@ public class DashBoardFormController {
     }
 
     public void btnUpdateData(ActionEvent actionEvent) throws Exception {
-        LoginBO loginBO = new LoginBOImpl();
         if (loginBO.updateUser(new UserDTO(txtUserId.getText(), txtUserName.getText(), txtPassword.getText()))) {
             new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Update it?").showAndWait();
         }

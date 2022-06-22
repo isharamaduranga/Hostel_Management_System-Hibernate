@@ -62,6 +62,13 @@ public class ManageStudentFormController {
     public JFXComboBox cmbGender;
     public JFXTextField txtSearchRegisterId;
 
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
+
+
+
     /** Define Linked-HashMap for the validation  */
     LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
@@ -120,7 +127,7 @@ public class ManageStudentFormController {
     }
 
     private void setStudentData() throws Exception {
-        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
+
         ObservableList<StudentDTO>tmList= FXCollections.observableArrayList();
         List<StudentDTO> studentDTOS = manageStudentBO.loadAllStudent();
 
@@ -165,7 +172,6 @@ public class ManageStudentFormController {
 
     public void AddStudentOnAction(ActionEvent actionEvent) throws Exception {
         try {
-            ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
 
             if (manageStudentBO.add(new StudentDTO(txtSRejNumber.getText(),
                     txtStudentName.getText(),
@@ -183,7 +189,6 @@ public class ManageStudentFormController {
     }
 
     public void DeleteStudentOnAction(ActionEvent actionEvent) throws Exception {
-        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
         try {
             if (manageStudentBO.deleteStudent(txtSRejNumber.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Do you want to Delete this record?").showAndWait();
@@ -198,7 +203,6 @@ public class ManageStudentFormController {
     }
 
     public void UpdateStudentOnAction(ActionEvent actionEvent) throws Exception {
-        ManageStudentBO manageStudentBO = new ManageStudentBOImpl();
         try {
             if (manageStudentBO.updateStudent(new StudentDTO(
                     txtSRejNumber.getText(),
