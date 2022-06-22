@@ -17,6 +17,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -31,6 +33,10 @@ public class LoginFormController {
     public JFXTextField txtUserName;
     public JFXPasswordField pwdPassword;
     public AnchorPane loginFormContext;
+
+    public ImageView dontShowIcon;
+    public ImageView showPasswordIcon;
+    public JFXTextField txtShowPassword;
 
     int attemptsLogin = 0;
 
@@ -85,5 +91,21 @@ public class LoginFormController {
             txtUserName.setVisible(false);
             pwdPassword.setVisible(false);
         }
+    }
+
+    public void donotShowPasswordIconClick(MouseEvent mouseEvent) {
+        txtShowPassword.setVisible(true);
+        pwdPassword.setVisible(false);
+        showPasswordIcon.setVisible(true);
+        dontShowIcon.setVisible(false);
+        txtShowPassword.setText(pwdPassword.getText());
+    }
+
+    public void ShowPasswordIconClick(MouseEvent mouseEvent) {
+        txtShowPassword.setText(pwdPassword.getText());
+        txtShowPassword.setVisible(false);
+        pwdPassword.setVisible(true);
+        showPasswordIcon.setVisible(false);
+        dontShowIcon.setVisible(true);
     }
 }
