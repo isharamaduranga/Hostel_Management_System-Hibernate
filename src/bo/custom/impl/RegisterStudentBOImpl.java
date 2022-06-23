@@ -74,4 +74,6 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
     public String generateRoomAvailableStatus(String id) throws SQLException, ClassNotFoundException, IOException {
         return roomReservationDAO.generateRoomAvailableStatus(id);
     }
+
+
 }

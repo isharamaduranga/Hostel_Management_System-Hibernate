@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -12,6 +13,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -133,66 +136,120 @@
                         <Image url="@assets/dashBgmin.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblDate" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="46.0" prefHeight="62.0" prefWidth="257.0" text="2022-03-05">
+                  <Label fx:id="lblDate" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="25.0" prefHeight="62.0" prefWidth="257.0" text="2022-03-05">
                      <font>
                         <Font name="System Bold" size="42.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblDay" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="108.0" prefHeight="36.0" prefWidth="197.0" text="SUNDAY">
+                  <Label fx:id="lblDay" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="87.0" prefHeight="36.0" prefWidth="197.0" text="SUNDAY">
                      <font>
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTime" alignment="BASELINE_CENTER" layoutX="540.0" layoutY="50.0" prefHeight="109.0" prefWidth="317.0" text="4:20:30">
+                  <Label fx:id="lblTime" alignment="BASELINE_CENTER" layoutX="540.0" layoutY="29.0" prefHeight="109.0" prefWidth="317.0" text="4:20:30">
                      <font>
                         <Font name="System Bold" size="75.0" />
                      </font>
                   </Label>
-                  <Separator layoutX="514.0" layoutY="24.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0" />
+                  <Separator layoutX="514.0" layoutY="16.0" orientation="VERTICAL" prefHeight="134.0" prefWidth="4.0" />
+                  <JFXComboBox fx:id="cmbRoomId" labelFloat="true" layoutX="332.0" layoutY="218.0" prefHeight="48.0" prefWidth="414.0" promptText="P L E A S E    S E L E C T    R O O M    I D " />
+                  <Label fx:id="lblRoomQty" alignment="BASELINE_CENTER" layoutX="150.0" layoutY="395.0" prefHeight="140.0" prefWidth="328.0" style="-fx-background-color: #0984e3; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAvailableRoom" alignment="BASELINE_CENTER" layoutX="588.0" layoutY="395.0" prefHeight="140.0" prefWidth="330.0" style="-fx-background-color: #4cd137; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                           <stops>
+                              <Stop color="#d73434" />
+                              <Stop color="#3c2e2e" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Text layoutX="228.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM QUENTITY" textAlignment="CENTER" wrappingWidth="174.99999408237636">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="665.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABLE  ROOMS" textAlignment="CENTER" wrappingWidth="174.99999408237636">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="176.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/roomQty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="610.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/availableRoom.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </center>
       </BorderPane>
-      <Pane fx:id="UserPane" layoutX="464.0" layoutY="176.0" opacity="0.86" prefHeight="458.0" prefWidth="489.0" style="-fx-background-color: white;">
+      <Pane fx:id="UserPane" layoutX="494.0" layoutY="217.0" opacity="0.86" prefHeight="458.0" prefWidth="489.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 2.5em; -fx-border-radius: 2.5em;" visible="false">
          <children>
-            <JFXTextField fx:id="txtUserName" editable="false" layoutX="148.0" layoutY="110.0" prefHeight="31.0" prefWidth="306.0" />
-            <JFXTextField fx:id="txtPassword" editable="false" layoutX="144.0" layoutY="203.0" prefHeight="31.0" prefWidth="306.0" />
-            <Label layoutX="38.0" layoutY="126.0" prefHeight="21.0" prefWidth="122.0" text="USER  NAME">
+            <JFXTextField fx:id="txtUserName" editable="false" layoutX="187.0" layoutY="107.0" prefHeight="31.0" prefWidth="232.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></JFXTextField>
+            <JFXTextField fx:id="txtPassword" editable="false" layoutX="183.0" layoutY="210.0" prefHeight="31.0" prefWidth="232.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></JFXTextField>
+            <Label layoutX="75.0" layoutY="117.0" prefHeight="25.0" prefWidth="102.0" text="USER  NAME">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-            <Label layoutX="38.0" layoutY="217.0" prefHeight="21.0" prefWidth="122.0" text="PASSWORD">
+            <Label layoutX="73.0" layoutY="219.0" prefHeight="25.0" prefWidth="102.0" text="PASSWORD">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-            <Label alignment="BASELINE_CENTER" layoutX="143.0" layoutY="9.0" prefHeight="25.0" prefWidth="184.0" text="USER DETAILS" textAlignment="CENTER">
+            <Label alignment="BASELINE_CENTER" layoutX="135.0" layoutY="6.0" prefHeight="32.0" prefWidth="219.0" text="U S E R   D E T A I L S" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <JFXButton layoutX="78.0" layoutY="362.0" onAction="#userRequestYES" prefHeight="32.0" prefWidth="134.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="YES" />
-            <Separator layoutX="28.0" layoutY="301.0" prefHeight="3.0" prefWidth="447.0" />
-            <Text fill="RED" layoutX="43.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do You Need to Change Your User Name OR Password">
+            <JFXButton layoutX="78.0" layoutY="397.0" onAction="#userRequestYES" prefHeight="32.0" prefWidth="134.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="YES" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></JFXButton>
+            <Separator layoutX="28.0" layoutY="334.0" prefHeight="3.0" prefWidth="447.0" />
+            <Text fill="RED" layoutX="40.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do You Need to Change Your User Name OR Password ?" wrappingWidth="430.5078125">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Text fx:id="hintNewUserName" fill="#05ae2a" layoutX="35.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P l e a s e   E n t e r   Y o u r   N e w   U s e r  N a m e" visible="false">
+            <Text fx:id="hintNewUserName" fill="#05ae2a" layoutX="74.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please  Enter  Your  New  User Name ...." visible="false">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
             <Separator layoutX="24.0" layoutY="41.0" prefHeight="3.0" prefWidth="447.0" />
-            <JFXButton fx:id="hintBtnUpdate" layoutX="153.0" layoutY="255.0" onAction="#btnUpdateData" prefHeight="32.0" prefWidth="164.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="U P D A T E" textFill="WHITE" visible="false" />
-            <Text fx:id="hintNewPassword" fill="#05ae2a" layoutX="36.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P l e a s e   E n t e r   Y o u r   N e w   P a s s w o r d" visible="false">
+            <JFXButton fx:id="hintBtnUpdate" layoutX="160.0" layoutY="277.0" onAction="#btnUpdateData" prefHeight="41.0" prefWidth="164.0" style="-fx-background-radius: 2.0em;" styleClass="buttonSearch" stylesheets="@css/color.css" text="U P D A T E" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></JFXButton>
+            <Text fx:id="hintNewPassword" fill="#05ae2a" layoutX="75.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please  Enter  Your  New  Password ...." visible="false">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <JFXButton layoutX="260.0" layoutY="362.0" onAction="#userRequestNO" prefHeight="32.0" prefWidth="134.0" styleClass="buttonLightBlue" stylesheets="@css/color.css" text="NO" />
-            <TextField fx:id="txtUserId" alignment="BASELINE_CENTER" layoutX="162.0" layoutY="54.0" prefHeight="21.0" prefWidth="152.0" text="UID-001">
+            <JFXButton layoutX="260.0" layoutY="397.0" onAction="#userRequestNO" prefHeight="32.0" prefWidth="134.0" styleClass="buttonDelete" stylesheets="@css/color.css" text="NO" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="15.0" />
+               </font></JFXButton>
+            <TextField fx:id="txtUserId" alignment="BASELINE_CENTER" layoutX="171.0" layoutY="42.0" prefHeight="21.0" prefWidth="152.0" style="-fx-background-color: white;" text="UID-001">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
          </children>

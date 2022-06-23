@@ -10,9 +10,14 @@ package controller;
 
 import bo.BOFactory;
 import bo.custom.LoginBO;
+import bo.custom.RegisterStudentBO;
+import bo.custom.ReservationDetailsBO;
+import bo.custom.impl.ReservationDetailsBOImpl;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dto.UserDTO;
+import entity.Room;
 import entity.User;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,6 +25,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -28,12 +34,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.NavigationUtil;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,6 +49,13 @@ import java.util.Date;
 import java.util.List;
 
 public class DashBoardFormController {
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    private final LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN_USER);
+    private final ReservationDetailsBO reservationDetailsBO = (ReservationDetailsBOImpl) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION_DETAILS);
+    private final RegisterStudentBO registerStudentBO = (RegisterStudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER_STUDENT);
+
     public Label lblDate;
     public Label lblDay;
     public Label lblTime;
@@ -49,16 +64,14 @@ public class DashBoardFormController {
     public BorderPane FullBoardContext;
     public JFXTextField txtUserName;
     public JFXTextField txtPassword;
-
     public Text hintNewUserName;
     public JFXButton hintBtnUpdate;
     public Text hintNewPassword;
     public TextField txtUserId;
+    public JFXComboBox<String> cmbRoomId;
+    public Label lblRoomQty;
+    public Label lblAvailableRoom;
 
-    /**
-     * Apply Dependency Injection (Property)
-     */
-    private final LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN_USER);
 
     public void initialize() {
         UserPane.setVisible(false);
@@ -68,7 +81,63 @@ public class DashBoardFormController {
             e.printStackTrace();
         }
         loadTimeDate();
+        loadRoomIds();
+
+        cmbRoomId.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue!=null){
+
+                setRoomData(newValue);
+                try {
+
+                    availableRoomCheckingLogic(newValue);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
+
+    private void availableRoomCheckingLogic(String rid) throws SQLException, IOException, ClassNotFoundException {
+        String RoomTypeCount = registerStudentBO.generateRoomAvailableStatus(rid);
+        int count = Integer.parseInt(RoomTypeCount);
+
+       int roomQty= Integer.parseInt(lblRoomQty.getText());
+
+       int availableRM= roomQty-count;
+
+       if(count >= roomQty){
+           lblAvailableRoom.setTextFill(Paint.valueOf("RED"));
+           lblAvailableRoom.setText("   OUT OF ROOM");
+       }else{
+           lblAvailableRoom.setTextFill(Paint.valueOf("WHITE"));
+           lblAvailableRoom.setText(availableRM+"  ROOMS");
+       }
+
+    }
+
+    private void setRoomData(String rid) {
+        try {
+            Room roomData = reservationDetailsBO.getRoomData(rid);
+
+            lblRoomQty.setText(String.valueOf(roomData.getQty()));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRoomIds() {
+        try {
+            cmbRoomId.getItems().addAll(reservationDetailsBO.getRoomIds());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     private void loadUserDataLogin() throws Exception {
         List<User> users = loginBO.loadAllUser();

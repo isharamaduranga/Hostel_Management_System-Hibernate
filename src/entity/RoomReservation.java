@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
-public class RoomReservation implements SuperEntity {
+public class RoomReservation {
     @Id
     private String res_id;
     private LocalDate date;
@@ -29,9 +29,6 @@ public class RoomReservation implements SuperEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id",referencedColumnName = "room_id")
     private Room room;
-
     private String status;
-
-
 
 }

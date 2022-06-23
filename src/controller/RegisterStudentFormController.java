@@ -124,9 +124,6 @@ public class RegisterStudentFormController {
         }
     }
 
-
-
-
     private void setStudentDataToFields(String id) throws Exception {
         Student student = registerStudentBO.getStudent(id);
         txtSname.setText(student.getName());

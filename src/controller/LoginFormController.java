@@ -72,6 +72,17 @@ public class LoginFormController {
                     stage1.setScene(scene);
                     stage1.centerOnScreen();
                     stage1.show();
+                }else{
+                    String tilte = "Sign In ";
+                    String message = "Something Went Wrong  Check fields";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(tilte);
+                    tray.setMessage(message);
+                    tray.setNotificationType(NotificationType.WARNING);
+                    tray.showAndDismiss(Duration.millis(3000));
                 }
 
             } catch (Exception e) {
