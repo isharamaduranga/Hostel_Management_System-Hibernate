@@ -55,8 +55,6 @@
     -fx-background-color : #01a3a4 ;
 }
 
-
-
 .buttonUpdate
 {
     -fx-background-color :  #9980FA;
@@ -127,4 +125,9 @@
 
 .textFieldEdit{-fx-background-color: linear-gradient(to right,#C4C4C4, #1eb61e);}
 
-.list-cell{-fx-background-color: linear-gradient(to right, rgba(103, 113, 238, 0.93), #53e858);}
+.list-cell{
+    -fx-background-color: linear-gradient(to right, rgba(142, 46, 234, 0.93), #d7e3d7);
+    -fx-prompt-text-fill: bold;
+    -fx-prompt-text-fill: rgb(0, 0, 0);
+}
+

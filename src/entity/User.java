@@ -18,6 +18,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+/*@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
 @Entity
 public class User {
     @Id

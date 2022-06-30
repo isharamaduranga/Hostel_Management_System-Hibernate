@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -152,13 +153,13 @@
                      </font>
                   </Label>
                   <Separator layoutX="514.0" layoutY="16.0" orientation="VERTICAL" prefHeight="134.0" prefWidth="4.0" />
-                  <JFXComboBox fx:id="cmbRoomId" labelFloat="true" layoutX="332.0" layoutY="218.0" prefHeight="48.0" prefWidth="414.0" promptText="P L E A S E    S E L E C T    R O O M    I D " />
-                  <Label fx:id="lblRoomQty" alignment="BASELINE_CENTER" layoutX="150.0" layoutY="395.0" prefHeight="140.0" prefWidth="328.0" style="-fx-background-color: #0984e3; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;" textFill="WHITE">
+                  <JFXComboBox fx:id="cmbRoomId" labelFloat="true" layoutX="333.0" layoutY="166.0" prefHeight="48.0" prefWidth="414.0" promptText="P L E A S E    S E L E C T    R O O M    I D " />
+                  <Label fx:id="lblRoomQty" alignment="BASELINE_CENTER" layoutX="182.0" layoutY="264.0" prefHeight="110.0" prefWidth="328.0" style="-fx-background-color: #0984e3; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblAvailableRoom" alignment="BASELINE_CENTER" layoutX="588.0" layoutY="395.0" prefHeight="140.0" prefWidth="330.0" style="-fx-background-color: #4cd137; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;">
+                  <Label fx:id="lblAvailableRoom" alignment="BASELINE_CENTER" layoutX="558.0" layoutY="264.0" prefHeight="110.0" prefWidth="328.0" style="-fx-background-color: #4cd137; -fx-background-radius: 2.5EM; -fx-border-color: BLACK; -fx-border-radius: 2.25EM;">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -171,45 +172,46 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <Text layoutX="228.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM QUENTITY" textAlignment="CENTER" wrappingWidth="174.99999408237636">
+                  <Text layoutX="260.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM QUENTITY" textAlignment="CENTER" wrappingWidth="174.99999408237636">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
-                  <Text layoutX="665.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABLE  ROOMS" textAlignment="CENTER" wrappingWidth="174.99999408237636">
+                  <Text layoutX="635.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABLE  ROOMS" textAlignment="CENTER" wrappingWidth="174.99999408237636">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="176.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="208.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/roomQty.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="610.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="52.0" fitWidth="64.0" layoutX="580.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/availableRoom.png" />
                      </image>
                   </ImageView>
+                  <PieChart fx:id="availableQtyPieChart" layoutX="245.0" layoutY="412.0" prefHeight="312.0" prefWidth="586.0" />
                </children>
             </AnchorPane>
          </center>
       </BorderPane>
-      <Pane fx:id="UserPane" layoutX="494.0" layoutY="217.0" opacity="0.86" prefHeight="458.0" prefWidth="489.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 2.5em; -fx-border-radius: 2.5em;" visible="false">
+      <Pane fx:id="UserPane" layoutX="494.0" layoutY="217.0" opacity="0.86" prefHeight="458.0" prefWidth="489.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 2.5em; -fx-border-radius: 2.5em;">
          <children>
             <JFXTextField fx:id="txtUserName" editable="false" layoutX="187.0" layoutY="107.0" prefHeight="31.0" prefWidth="232.0">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
                </font></JFXTextField>
             <JFXTextField fx:id="txtPassword" editable="false" layoutX="183.0" layoutY="210.0" prefHeight="31.0" prefWidth="232.0">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
                </font></JFXTextField>
-            <Label layoutX="75.0" layoutY="117.0" prefHeight="25.0" prefWidth="102.0" text="USER  NAME">
+            <Label layoutX="75.0" layoutY="126.0" prefHeight="25.0" prefWidth="102.0" text="USER  NAME">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-            <Label layoutX="73.0" layoutY="219.0" prefHeight="25.0" prefWidth="102.0" text="PASSWORD">
+            <Label layoutX="73.0" layoutY="229.0" prefHeight="25.0" prefWidth="102.0" text="PASSWORD">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>

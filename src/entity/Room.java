@@ -19,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+/*@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
 @Entity
 public class Room  {
     @Id

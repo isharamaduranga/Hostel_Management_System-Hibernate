@@ -10,22 +10,29 @@ package controller;
 
 import bo.BOFactory;
 import bo.custom.LoginBO;
+import bo.custom.ManageRoomBO;
 import bo.custom.RegisterStudentBO;
 import bo.custom.ReservationDetailsBO;
 import bo.custom.impl.ReservationDetailsBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dto.RoomDTO;
 import dto.UserDTO;
 import entity.Room;
 import entity.User;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -45,8 +52,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class DashBoardFormController {
     /**
@@ -55,6 +65,7 @@ public class DashBoardFormController {
     private final LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN_USER);
     private final ReservationDetailsBO reservationDetailsBO = (ReservationDetailsBOImpl) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION_DETAILS);
     private final RegisterStudentBO registerStudentBO = (RegisterStudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.REGISTER_STUDENT);
+    private final ManageRoomBO manageRoomBO = (ManageRoomBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MANAGE_ROOM);
 
     public Label lblDate;
     public Label lblDay;
@@ -71,12 +82,14 @@ public class DashBoardFormController {
     public JFXComboBox<String> cmbRoomId;
     public Label lblRoomQty;
     public Label lblAvailableRoom;
+    public PieChart availableQtyPieChart;
 
 
     public void initialize() {
         UserPane.setVisible(false);
         try {
             loadUserDataLogin();
+            initPieChart();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +111,32 @@ public class DashBoardFormController {
         });
 
     }
+
+    private void initPieChart() throws Exception {
+
+        ObservableList<PieChart.Data> productData = FXCollections.observableArrayList();
+
+        try {
+
+            List<RoomDTO> roomDTOS = manageRoomBO.loadAllStudent();
+
+            for (RoomDTO roomDTO : roomDTOS) {
+                String rmTypeId=roomDTO.getRoom_id();
+                int qty= roomDTO.getQty();
+                productData.add(new PieChart.Data(rmTypeId, qty));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        productData.forEach(data ->
+                data.nameProperty().bind(
+                        Bindings.concat(data.getName(), " ", data.pieValueProperty())
+                )
+        );
+        availableQtyPieChart.setData(productData);
+        availableQtyPieChart.setTitle(" R O O M  T Y P E  W I S E  Q U A N T I T Y  P O G R E S S");
+    }
+
 
     private void availableRoomCheckingLogic(String rid) throws SQLException, IOException, ClassNotFoundException {
         String RoomTypeCount = registerStudentBO.generateRoomAvailableStatus(rid);
