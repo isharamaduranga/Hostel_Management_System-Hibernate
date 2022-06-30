@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="byte-buddy-1.8.17">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/byte-buddy-1.8.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/jboss-logging-3.3.2.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/hibernate-core-5.3.6.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/javassist-3.23.1-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/hibernate-ehcache-5.3.6.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/hibernate-commons-annotations-5.0.4.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/classmate-1.3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/ehcache-2.10.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/slf4j-api-1.7.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/second_cashe/jandex-2.0.5.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
