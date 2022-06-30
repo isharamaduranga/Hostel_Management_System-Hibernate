@@ -17,8 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-/*@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class Student {
     @Id
