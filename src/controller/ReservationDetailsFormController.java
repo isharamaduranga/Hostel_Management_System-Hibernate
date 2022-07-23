@@ -58,6 +58,8 @@ public class ReservationDetailsFormController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }else{
+
             }
         });
 
@@ -81,7 +83,7 @@ public class ReservationDetailsFormController {
             tmList.add(customEntity);
             tblRoomReservation.setItems(tmList);
         }
-        System.out.println(tmList);
+
     }
 
     private void loadRoomIds() {
