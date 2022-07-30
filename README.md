@@ -43,6 +43,7 @@
 * Hibernate
 * Java
 * CSS
+* JavaFx
 
 ## License
 **Copyright @ 2022 All Right Reserved By Ishara Maduranga**
