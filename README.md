@@ -2,7 +2,7 @@
 
 ## Description
 
-#### This Application is single Alone Application.And this Application developed for solving some problems of hostel students and gives best Efficient service for them
+#### This Application is Stand Alone Application.And this Application developed for solving some problems of hostel students and gives best Efficient service for them
 
 ## Main Functions of Application
 * Login Interface
